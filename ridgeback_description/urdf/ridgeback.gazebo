@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<robot>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>/</robotNamespace>
+      <updateRate>50.0</updateRate>
+      <bodyName>imu_link</bodyName>
+      <topicName>imu/data</topicName>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+      <updateRate>40</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <bodyName>navsat_link</bodyName>
+      <frameId>base_link</frameId>
+      <topicName>/navsat/fix</topicName>
+      <velocityTopicName>/navsat/vel</velocityTopicName>
+      <referenceLatitude>49.9</referenceLatitude>
+      <referenceLongitude>8.9</referenceLongitude>
+      <referenceHeading>0</referenceHeading>
+      <referenceAltitude>0</referenceAltitude>
+      <drift>0.0001 0.0001 0.0001</drift>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="chassis_link">
+    <material>Gazebo/DarkGrey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+    <gazebo reference="imu_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="navsat_link">
+    <material>Gazebo/DarkGrey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <gazebo reference="fenders_link">
+    <material>Gazebo/Yellow</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="front_left_wheel_link">
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <fdir1>0.707107 -0.707107 0</fdir1>
+    <mu1>0.0001</mu1>
+    <mu2>1000</mu2>
+    <slip1>1000</slip1>
+    <slip2>0.0001</slip2>
+  </gazebo>
+  <gazebo reference="front_right_wheel_link">
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <fdir1>-0.707107 0.707107 0</fdir1>
+    <mu1>0.0001</mu1>
+    <mu2>1000</mu2>
+    <slip1>1000</slip1>
+    <slip2>0.0001</slip2>
+  </gazebo>
+  <gazebo reference="rear_left_wheel_link">
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <fdir1>0.707107 0.707107 0</fdir1>
+    <mu1>0.0001</mu1>
+    <mu2>1000</mu2>
+    <slip1>1000</slip1>
+    <slip2>0.0001</slip2>
+  </gazebo>
+  <gazebo reference="rear_right_wheel_link">
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <fdir1>0.707107 -0.707107 0</fdir1>
+    <mu1>0.0001</mu1>
+    <mu2>1000</mu2>
+    <slip1>1000</slip1>
+    <slip2>0.0001</slip2>
+  </gazebo>
+
+</robot>
