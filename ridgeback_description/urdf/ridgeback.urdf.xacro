@@ -125,20 +125,6 @@
     </inertial>
   </link>
 
-  <!--<link name="fenders_link">
-    <visual>
-      <origin xyz="0 0 ${footprint_vertical_offset}" rpy="${PI/2} 0 ${PI/2}"/>
-      <geometry>
-        <mesh filename="package://ridgeback_description/meshes/ridgeback-fenders.stl"/>
-      </geometry>
-      <material name="yellow" />
-    </visual>
-  </link>
-  <joint name="fenders_joint" type="fixed">
-    <parent link="chassis_link" />
-    <child link="fenders_link" />
-  </joint>-->
-
   <!-- TODO: Make this internal_imu_link or something, and use a mixed-in xacro
        to supply the joint between it and imu_link. This is important so that imu_link
        always points to the "active" IMU. When an upgrade IMU is connected, the
