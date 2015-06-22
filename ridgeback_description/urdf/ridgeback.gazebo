@@ -6,6 +6,7 @@
     </plugin>
   </gazebo>
 
+  <!--
   <gazebo>
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
       <robotNamespace>/</robotNamespace>
@@ -36,6 +37,7 @@
       <drift>0.0001 0.0001 0.0001</drift>
     </plugin>
   </gazebo>
+  -->
 
   <gazebo reference="base_link">
     <turnGravityOff>false</turnGravityOff>
@@ -58,7 +60,7 @@
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
-  <gazebo reference="front_left_wheel_link">
+  <!--<gazebo reference="front_left_wheel_link">
     <kp>500000.0</kp>
     <kd>10.0</kd>
     <fdir1>0.707107 -0.707107 0</fdir1>
@@ -93,6 +95,6 @@
     <mu2>1000</mu2>
     <slip1>1000</slip1>
     <slip2>0.0001</slip2>
-  </gazebo>
+  </gazebo>-->
 
 </robot>
