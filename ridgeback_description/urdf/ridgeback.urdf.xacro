@@ -6,13 +6,16 @@
   <xacro:property name="track" value="0.622" />
   <xacro:property name="wheel_vertical_offset" value="0.05" />
 
-  <xacro:property name="wheel_radius" value="0.1518" />
+  <xacro:property name="wheel_radius" value="0.0759" />
   <xacro:property name="wheel_width" value="0.0471" />
 
   <xacro:property name="chassis_length" value="0.927" />
   <xacro:property name="chassis_width" value="0.787" />
   <xacro:property name="chassis_height" value="0.216" />
 
+  <xacro:property name="cover_offset" value="0.240" />
+  <xacro:property name="top_offset" value="0.05" />
+  <!-- Need to verify values above -->
   <xacro:property name="dummy_inertia" value="1e-09"/>
 
   <xacro:property name="mount_spacing" value="0.120" />
@@ -22,14 +25,13 @@
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
 
-  <xacro:macro name="wheel" params="prefix y_friction *joint_pose">
+  <xacro:macro name="wheel" params="prefix side y_friction *joint_pose">
 
-    <link name="${prefix}_wheel_link">
+    <link name="${prefix}_${side}_wheel_link">
       <visual>
         <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
         <geometry>
-          <!--<mesh filename="package://ridgeback_description/meshes/ridgeback-wheel.stl"/> -->
-          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+          <mesh filename="package://ridgeback_description/meshes/wheel.stl"/>
         </geometry>
         <material name="black" />
       </visual>
@@ -49,7 +51,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_wheel_link">
+    <gazebo reference="${prefix}_${side}_wheel_link">
       <material>Gazebo/DarkGrey</material>
       <friction>
         <ode>
@@ -62,9 +64,9 @@
       </friction>
     </gazebo>
 
-    <joint name="${prefix}_wheel" type="continuous">
-      <parent link="chassis_link"/>
-      <child link="${prefix}_wheel_link" />
+    <joint name="${prefix}_${side}_wheel" type="continuous">
+      <parent link="${prefix}_rocker_link"/>
+      <child link="${prefix}_${side}_wheel_link" />
       <xacro:insert_block name="joint_pose" />
       <axis xyz="0 1 0" />
     </joint>
@@ -74,24 +76,66 @@
       <joint name="${prefix}_wheel">
         <hardwareInterface>VelocityJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${prefix}_actuator">
+      <actuator name="${prefix}_${side}_actuator">
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
   </xacro:macro>
 
-  <xacro:wheel prefix="front_left" y_friction="-0.707107">
-    <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+
+<xacro:macro name="rocker" params="prefix joint_type wheel_location *joint_limits">
+
+  <link name="${prefix}_rocker_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/rocker.stl"/>
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${wheelbase} ${track} 0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="${prefix}_rocker" type="${joint_type}">
+    <parent link="axle_link"/>
+    <child link="${prefix}_rocker_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+    <xacro:insert_block name="joint_limits" />
+  </joint>
+
+  <transmission name="${prefix}_rocker_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}_rocker">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}_actuator">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <xacro:wheel prefix="${prefix}" side="left" y_friction="-0.707107">
+    <origin xyz="${wheel_location*wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel prefix="front_right" y_friction="0.707107">
-    <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  <xacro:wheel prefix="${prefix}" side="right" y_friction="0.707107">
+    <origin xyz="${wheel_location*wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
-  <xacro:wheel prefix="rear_left" y_friction="0.707107">
-    <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:wheel>
-  <xacro:wheel prefix="rear_right" y_friction="-0.707107">
-    <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:wheel>
+
+</xacro:macro>
+
+<xacro:rocker prefix="front" joint_type="revolute" wheel_location="1" >
+  <limit lower="-0.2" upper="0.2" effort="0" velocity="0" />
+</xacro:rocker>
+
+<xacro:rocker prefix="rear" joint_type="fixed" wheel_location="-1" >
+  <limit effort="0" velocity="0" />
+</xacro:rocker>
 
   <link name="base_link"></link>
 
@@ -103,14 +147,14 @@
 
   <link name="chassis_link">
     <visual>
-      <origin xyz="0 0 ${chassis_height/2}"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0" />
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+        <mesh filename="package://ridgeback_description/meshes/body.stl"/>
       </geometry>
-      <material name="dark_grey" />
+      <material name="black" />
     </visual>
     <collision>
-      <origin xyz="0 0 ${chassis_height/2}"/>
+      <origin xyz="0 0 0"/>
       <geometry>
         <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
@@ -124,6 +168,71 @@
         izz="0.4485"/>
     </inertial>
   </link>
+
+<joint name="front_cover_link_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <parent link="chassis_link"/>
+  <child link="front_cover_link" />
+</joint>
+
+  <link name="front_cover_link">
+    <visual>
+      <origin xyz="${cover_offset} ${-chassis_width/2} 0" rpy=" 0 0 0" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/end-cover.stl"  scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black" />
+    </visual>
+  </link>
+
+<joint name="rear_cover_link_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <parent link="chassis_link"/>
+  <child link="rear_cover_link" />
+</joint>
+
+  <link name="rear_cover_link">
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 ${PI}" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/end-cover.stl"  scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black" />
+    </visual>
+  </link>
+
+<joint name="top_link_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <parent link="chassis_link"/>
+  <child link="top_link" />
+</joint>
+
+  <link name="top_link">
+    <visual>
+      <origin xyz="${-chassis_length/2} ${-chassis_width/2} ${top_offset}" rpy=" ${PI/2} 0 ${PI/2}" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/top.stl" />
+      </geometry>
+      <material name="black" />
+    </visual>
+  </link>
+
+<joint name="axle_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <parent link="chassis_link"/>
+  <child link="axle_link" />
+</joint>
+
+  <link name="axle_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/axle.stl" />
+      </geometry>
+      <material name="black" />
+    </visual>
+  </link>
+
 
   <!-- TODO: Make this internal_imu_link or something, and use a mixed-in xacro
        to supply the joint between it and imu_link. This is important so that imu_link
