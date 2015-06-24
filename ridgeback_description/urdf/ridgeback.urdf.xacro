@@ -9,7 +9,7 @@
   <xacro:property name="wheel_radius" value="0.0759" />
   <xacro:property name="wheel_width" value="0.0471" />
 
-  <xacro:property name="chassis_length" value="0.927" />
+  <xacro:property name="chassis_length" value="0.935" />
   <xacro:property name="chassis_width" value="0.787" />
   <xacro:property name="chassis_height" value="0.216" />
 
@@ -149,7 +149,7 @@
       <material name="black" />
     </visual>
     <collision>
-      <origin xyz="0 0 0"/>
+      <origin xyz="0 0  ${chassis_height/2}"/>
       <geometry>
         <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
