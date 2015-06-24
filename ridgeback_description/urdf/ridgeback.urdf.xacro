@@ -91,12 +91,6 @@
       </geometry>
       <material name="black" />
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="${wheelbase} ${track} 0"/>
-      </geometry>
-    </collision>
   </link>
 
   <joint name="${prefix}_rocker" type="${joint_type}">
