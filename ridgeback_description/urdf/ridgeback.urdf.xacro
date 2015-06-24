@@ -125,7 +125,7 @@
 </xacro:macro>
 
 <xacro:rocker prefix="front" joint_type="revolute" location="1" >
-  <limit lower="-0.2" upper="0.2" effort="0" velocity="0" />
+  <limit lower="-0.08726" upper="0.08726" effort="0" velocity="0" />
 </xacro:rocker>
 
 <xacro:rocker prefix="rear" joint_type="fixed" location="-1" >
@@ -172,7 +172,7 @@
 
   <link name="front_cover_link">
     <visual>
-      <origin xyz="0 0 0" rpy=" ${PI/2} 0 ${PI/2}"  />
+      <origin xyz="0 0 0" rpy=" ${PI/2} 0 ${-PI/2}"  />
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/end-cover.stl" />
       </geometry>
@@ -188,7 +188,7 @@
 
   <link name="rear_cover_link">
     <visual>
-      <origin xyz="0 0 0" rpy=" ${PI/2} 0 ${-PI/2}"  />
+      <origin xyz="0 0 0" rpy=" ${PI/2} 0 ${PI/2}"  />
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/end-cover.stl" />
       </geometry>
