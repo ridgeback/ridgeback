@@ -21,80 +21,27 @@
       <headingGaussianNoise>0.005</headingGaussianNoise>
     </plugin>
   </gazebo>
-
-  <gazebo>
-    <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
-      <updateRate>40</updateRate>
-      <robotNamespace>/</robotNamespace>
-      <bodyName>navsat_link</bodyName>
-      <frameId>base_link</frameId>
-      <topicName>/navsat/fix</topicName>
-      <velocityTopicName>/navsat/vel</velocityTopicName>
-      <referenceLatitude>49.9</referenceLatitude>
-      <referenceLongitude>8.9</referenceLongitude>
-      <referenceHeading>0</referenceHeading>
-      <referenceAltitude>0</referenceAltitude>
-      <drift>0.0001 0.0001 0.0001</drift>
-    </plugin>
-  </gazebo>
   -->
 
+  <!-- All static links get collapsed down to base_link in Gazebo, so that's
+       the one to apply the colour to. -->
   <gazebo reference="base_link">
-    <turnGravityOff>false</turnGravityOff>
-  </gazebo>
-
-  <gazebo reference="chassis_link">
     <material>Gazebo/DarkGrey</material>
-    <turnGravityOff>false</turnGravityOff>
-  </gazebo>
-    <gazebo reference="imu_link">
-    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
-  <gazebo reference="navsat_link">
+  <gazebo reference="front_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
-    <turnGravityOff>false</turnGravityOff>
-  </gazebo>
-  <gazebo reference="fenders_link">
-    <material>Gazebo/Yellow</material>
-    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
-  <!--<gazebo reference="front_left_wheel_link">
-    <kp>500000.0</kp>
-    <kd>10.0</kd>
-    <fdir1>0.707107 -0.707107 0</fdir1>
-    <mu1>0.0001</mu1>
-    <mu2>1000</mu2>
-    <slip1>1000</slip1>
-    <slip2>0.0001</slip2>
-  </gazebo>
   <gazebo reference="front_right_wheel_link">
-    <kp>500000.0</kp>
-    <kd>10.0</kd>
-    <fdir1>-0.707107 0.707107 0</fdir1>
-    <mu1>0.0001</mu1>
-    <mu2>1000</mu2>
-    <slip1>1000</slip1>
-    <slip2>0.0001</slip2>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="rear_left_wheel_link">
-    <kp>500000.0</kp>
-    <kd>10.0</kd>
-    <fdir1>0.707107 0.707107 0</fdir1>
-    <mu1>0.0001</mu1>
-    <mu2>1000</mu2>
-    <slip1>1000</slip1>
-    <slip2>0.0001</slip2>
-  </gazebo>
-  <gazebo reference="rear_right_wheel_link">
-    <kp>500000.0</kp>
-    <kd>10.0</kd>
-    <fdir1>0.707107 -0.707107 0</fdir1>
-    <mu1>0.0001</mu1>
-    <mu2>1000</mu2>
-    <slip1>1000</slip1>
-    <slip2>0.0001</slip2>
-  </gazebo>-->
 
+  <gazebo reference="rear_left_wheel_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_wheel_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
 </robot>
