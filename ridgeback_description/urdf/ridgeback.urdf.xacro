@@ -24,6 +24,8 @@
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
 
+  <xacro:include filename="accessories/sick_lms1xx_mount.urdf.xacro" />
+
   <xacro:macro name="wheel" params="prefix side y_friction *joint_pose">
     <link name="${prefix}_${side}_wheel_link">
       <visual>
@@ -223,6 +225,9 @@
     <parent link="chassis_link" />
     <child link="imu_link" />
   </joint>
+
+  <xacro:sick_lms1xx_mount prefix="front" topic="front_scan" location="1" />
+  <xacro:sick_lms1xx_mount prefix="rear" topic="rear_scan" location="-1" />
 
   <!-- Bring in simulation data for Gazebo. -->
   <xacro:include filename="ridgeback.gazebo" />
