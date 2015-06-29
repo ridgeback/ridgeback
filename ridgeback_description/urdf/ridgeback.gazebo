@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot>
+
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
@@ -22,7 +23,11 @@
     </plugin>
   </gazebo>
   -->
-
+  <gazebo>
+    <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>front_rocker</jointName>
+    </plugin>
+  </gazebo>
   <!-- All static links get collapsed down to base_link in Gazebo, so that's
        the one to apply the colour to. -->
   <gazebo reference="base_link">

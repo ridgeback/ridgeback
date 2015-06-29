@@ -1,3 +1,4 @@
-# The base Ridgeback configuration has no accessories at all,
-# so nothing need be specified here; the defaults as given
-# in the URDF suffice to define this config.
+# The base Ridgeback configuration has only the
+# front laser.
+
+RIDGEBACK_FRONT_LASER=1
