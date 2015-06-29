@@ -1,0 +1,4 @@
+# The rear_laser configuration of Ridgeback with
+# a SICK LMS100 series LIDAR on the rear.
+
+RIDGEBACK_REAR_LASER=1
