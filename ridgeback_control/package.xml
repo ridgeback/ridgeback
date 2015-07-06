@@ -11,16 +11,26 @@
   <author email="mpurvis@clearpathrobotics.com">Mike Purvis</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>controller_interface</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>realtime_tools</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>urdf</build_depend>
   <build_depend>roslaunch</build_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>interactive_marker_twist_server</run_depend>
-  <run_depend>diff_drive_controller</run_depend>
   <run_depend>joint_state_controller</run_depend>
   <run_depend>joy</run_depend>
   <run_depend>robot_localization</run_depend>
   <run_depend>teleop_twist_joy</run_depend>
   <run_depend>topic_tools</run_depend>
+  <run_depend>controller_interface</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>realtime_tools</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>urdf</run_depend>
 
   <export>
+    <controller_interface plugin="${prefix}/mecanum_drive_controller_plugins.xml"/>
   </export>
 </package>
