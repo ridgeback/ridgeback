@@ -24,7 +24,7 @@
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
 
-  <xacro:macro name="wheel" params="prefix side y_friction *joint_pose">
+  <xacro:macro name="wheel" params="prefix side *joint_pose">
     <link name="${prefix}_${side}_wheel_link">
       <visual>
         <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
@@ -95,11 +95,11 @@
       <xacro:insert_block name="joint_limits" />
     </joint>
 
-    <xacro:wheel prefix="${prefix}" side="left" y_friction="-0.707107">
-      <origin xyz="0 ${-rocker_width/2 - wheel_width/2} 0" rpy="0 0 0" />
-    </xacro:wheel>
-    <xacro:wheel prefix="${prefix}" side="right" y_friction="0.707107">
+    <xacro:wheel prefix="${prefix}" side="left">
       <origin xyz="0 ${rocker_width/2 + wheel_width/2} 0" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="${prefix}" side="right">
+      <origin xyz="0 ${-(rocker_width/2 + wheel_width/2)} 0" rpy="0 0 0" />
     </xacro:wheel>
   </xacro:macro>
 

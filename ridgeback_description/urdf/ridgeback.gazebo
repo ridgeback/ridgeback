@@ -1,12 +1,52 @@
 <?xml version="1.0"?>
 <robot>
   <gazebo>
+    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
+      <wheelLinkName>front_left_wheel_link</wheelLinkName>
+      <fixedLinkName>base_link</fixedLinkName>
+      <rollerAngle>-0.785398</rollerAngle>
+      <rollerFriction>0.01</rollerFriction>
+      <rollerSkidFriction>12000</rollerSkidFriction>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
+      <wheelLinkName>front_right_wheel_link</wheelLinkName>
+      <fixedLinkName>base_link</fixedLinkName>
+      <rollerAngle>0.785398</rollerAngle>
+      <rollerFriction>0.01</rollerFriction>
+      <rollerSkidFriction>12000</rollerSkidFriction>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
+      <wheelLinkName>rear_left_wheel_link</wheelLinkName>
+      <fixedLinkName>base_link</fixedLinkName>
+      <rollerAngle>0.785398</rollerAngle>
+      <rollerFriction>0.01</rollerFriction>
+      <rollerSkidFriction>12000</rollerSkidFriction>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
+      <wheelLinkName>rear_right_wheel_link</wheelLinkName>
+      <fixedLinkName>base_link</fixedLinkName>
+      <rollerAngle>-0.785398</rollerAngle>
+      <rollerFriction>0.01</rollerFriction>
+      <rollerSkidFriction>12000</rollerSkidFriction>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
     </plugin>
   </gazebo>
 
-  <!--
+    <!--
   <gazebo>
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
       <robotNamespace>/</robotNamespace>
@@ -31,17 +71,41 @@
 
   <gazebo reference="front_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
   </gazebo>
 
   <gazebo reference="front_right_wheel_link">
     <material>Gazebo/DarkGrey</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
   </gazebo>
 
   <gazebo reference="rear_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
   </gazebo>
 
   <gazebo reference="rear_right_wheel_link">
     <material>Gazebo/DarkGrey</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
   </gazebo>
 </robot>
