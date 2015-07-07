@@ -18,10 +18,11 @@ set(mecanum_drive_controller_sources
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES mecanum_drive_controller
+  CATKIN_DEPENDS controller_interface realtime_tools
 )
 
 include_directories(
-  include mecanum_drive_controller
+  include ${catkin_INCLUDE_DIRS}
 )
 
 add_library(mecanum_drive_controller ${mecanum_drive_controller_headers} ${mecanum_drive_controller_sources})
