@@ -6,7 +6,7 @@
       <fixedLinkName>base_link</fixedLinkName>
       <rollerAngle>-0.785398</rollerAngle>
       <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>12000</rollerSkidFriction>
+      <rollerSkidFriction>1</rollerSkidFriction>
     </plugin>
   </gazebo>
 
@@ -16,7 +16,7 @@
       <fixedLinkName>base_link</fixedLinkName>
       <rollerAngle>0.785398</rollerAngle>
       <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>12000</rollerSkidFriction>
+      <rollerSkidFriction>1</rollerSkidFriction>
     </plugin>
   </gazebo>
 
@@ -26,7 +26,7 @@
       <fixedLinkName>base_link</fixedLinkName>
       <rollerAngle>0.785398</rollerAngle>
       <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>12000</rollerSkidFriction>
+      <rollerSkidFriction>1</rollerSkidFriction>
     </plugin>
   </gazebo>
 
@@ -36,7 +36,7 @@
       <fixedLinkName>base_link</fixedLinkName>
       <rollerAngle>-0.785398</rollerAngle>
       <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>12000</rollerSkidFriction>
+      <rollerSkidFriction>1</rollerSkidFriction>
     </plugin>
   </gazebo>
 
