@@ -38,3 +38,15 @@ float32 total_current_peak
 
 # Integration of all power consumption since MCU power-on, in watt-hours.
 float64 total_power_consumed
+
+# Location of fans.
+uint8 EQUIPMENT_BAY_INTAKE=0
+uint8 EQUIPMENT_BAY_EXHAUST=1
+uint8 CHARGER_BAY_INTAKE=2
+uint8 CHARGER_BAY_EXHAUST=3
+uint8 USER_BAY_INTAKE=4
+uint8 USER_BAY_EXHAUST=5
+
+uint8 FAN_OFF=0
+uint8 FAN_ON=1
+bool[6] fans
