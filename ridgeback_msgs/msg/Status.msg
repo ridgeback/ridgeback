@@ -10,7 +10,7 @@ string hardware_id
 duration mcu_uptime
 duration connection_uptime
 
-# Temperature of MCU's pcb on Celsius.
+# Temperature of MCU's PCB in Celsius.
 float32 pcb_temperature
 float32 mcu_temperature
 
