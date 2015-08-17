@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <robot>
-
   <gazebo>
     <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
       <wheelLinkName>front_left_wheel_link</wheelLinkName>
