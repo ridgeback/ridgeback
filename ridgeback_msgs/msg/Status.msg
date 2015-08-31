@@ -28,6 +28,10 @@ bool charger_connected
 float32 measured_battery
 float32 measured_12v
 float32 measured_5v
+float32 measured_inverter
+float32 measured_front_axle
+float32 measured_rear_axle
+float32 measured_light
 
 # Current senses available on platform, in amps.
 # Averaged over the message period
