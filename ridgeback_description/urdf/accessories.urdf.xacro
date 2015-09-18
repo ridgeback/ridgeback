@@ -10,7 +10,7 @@
     ridgeback_base/launch/base.launch
   -->
 
-  <xacro:include filename="accessories/sick_lms1xx_mount.urdf.xacro" />
+  <xacro:include filename="$(find ridgeback_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro" />
 
   <!-- If enabled, generate the front LASER payload (by default enabled and a SICK LMS111). -->
   <xacro:if value="$(optenv RIDGEBACK_FRONT_LASER 0)">
