@@ -8,9 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
   FILES
-  Drive.msg
-  DriveFeedback.msg
-  Feedback.msg
   Status.msg
 )
 
