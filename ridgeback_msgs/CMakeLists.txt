@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
   FILES
+  Fans.msg
   Lights.msg
   RGB.msg
   Status.msg
