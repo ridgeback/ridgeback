@@ -7,6 +7,6 @@ uint8 USER_BAY_INTAKE=4
 uint8 USER_BAY_EXHAUST=5
 
 uint8 FAN_OFF=0
-uint8 FAN_ON_LOW=1
-uint8 FAN_ON_HIGH=2
+uint8 FAN_ON_HIGH=1
+uint8 FAN_ON_LOW=2
 uint8[6] fans
