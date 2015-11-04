@@ -15,10 +15,10 @@ ridgeback_velocity_controller:
 
   # Odometry fused with IMU is published by robot_localization, so
   # no need to publish a TF based on encoders alone.
-  enable_odom_tf: true
+  enable_odom_tf: false
 
   # Wheel separation and radius multipliers
-  wheel_separation_multiplier: 1.5 # default: 1.0
+  wheel_separation_multiplier: 1.0 # default: 1.0
   wheel_radius_multiplier    : 1.0 # default: 1.0
 
   # Velocity and acceleration limits
@@ -40,3 +40,24 @@ ridgeback_velocity_controller:
       max_velocity           : 2.0   # rad/s
       has_acceleration_limits: true
       max_acceleration       : 1.0   # rad/s^2
+
+ekf_localization:
+  frequency: 50
+  two_d_mode: true
+  odom0: /ridgeback_velocity_controller/odom
+  odom0_config: [false, false, false,
+                 false, false, false,
+                 true, true, false,
+                 false, false, true,
+                 false, false, false]
+  odom0_differential: false
+  imu0: /imu/data
+  imu0_config: [false, false, false,
+                false, false, true,
+                false, false, false,
+                false, false, true,
+                true, true, false]
+  imu0_differential: false
+  odom_frame: odom
+  base_link_frame: base_link
+  world_frame: odom
