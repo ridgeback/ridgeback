@@ -1,4 +1,4 @@
 # The base Ridgeback configuration has only the
 # front laser.
 
-RIDGEBACK_FRONT_LASER=1
+RIDGEBACK_FRONT_LASER_TYPE=sick_lms1xx
