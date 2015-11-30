@@ -2,5 +2,5 @@
 # the optional SICK LMS100 series LIDAR on the rear
 # and the default front laser.
 
-RIDGEBACK_FRONT_LASER=1
-RIDGEBACK_REAR_LASER=1
+RIDGEBACK_FRONT_SICK_LASER=1
+RIDGEBACK_REAR_SICK_LASER=1
