@@ -1,64 +1,12 @@
 <?xml version="1.0"?>
 <robot>
-  <!-- This is a hack as the mecanum plugin below is not working correctly in
-       Gazebo 5, and we need support in Gazebo 2 regardless. -->
-  <gazebo>
-    <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
-      <commandTopic>cmd_vel</commandTopic>
-      <odometryTopic>odom</odometryTopic>
-      <odometryFrame>odom</odometryFrame>
-      <odometryRate>20.0</odometryRate>
-      <robotBaseFrame>base_link</robotBaseFrame>
-    </plugin>
-  </gazebo>
-
-  <!--<gazebo>
-    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
-      <wheelLinkName>front_left_wheel_link</wheelLinkName>
-      <fixedLinkName>base_link</fixedLinkName>
-      <rollerAngle>-0.785398</rollerAngle>
-      <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>1</rollerSkidFriction>
-    </plugin>
-  </gazebo>
-
-  <gazebo>
-    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
-      <wheelLinkName>front_right_wheel_link</wheelLinkName>
-      <fixedLinkName>base_link</fixedLinkName>
-      <rollerAngle>0.785398</rollerAngle>
-      <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>1</rollerSkidFriction>
-    </plugin>
-  </gazebo>
-
-  <gazebo>
-    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
-      <wheelLinkName>rear_left_wheel_link</wheelLinkName>
-      <fixedLinkName>base_link</fixedLinkName>
-      <rollerAngle>0.785398</rollerAngle>
-      <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>1</rollerSkidFriction>
-    </plugin>
-  </gazebo>
-
-  <gazebo>
-    <plugin name="mecanum_gazebo" filename="libmecanum_gazebo_plugin.so">
-      <wheelLinkName>rear_right_wheel_link</wheelLinkName>
-      <fixedLinkName>base_link</fixedLinkName>
-      <rollerAngle>-0.785398</rollerAngle>
-      <rollerFriction>0.01</rollerFriction>
-      <rollerSkidFriction>1</rollerSkidFriction>
-    </plugin>
-  </gazebo>-->
-
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
     </plugin>
   </gazebo>
 
-  <gazebo>
+  <!--<gazebo>
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
       <robotNamespace>/</robotNamespace>
       <updateRate>50.0</updateRate>
@@ -71,7 +19,7 @@
       <headingDrift>0.005</headingDrift>
       <headingGaussianNoise>0.005</headingGaussianNoise>
     </plugin>
-  </gazebo>
+  </gazebo>-->
 
   <gazebo>
     <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
@@ -90,8 +38,8 @@
 
   <gazebo reference="front_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.01</mu1>
-    <mu2>0.01</mu2>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -100,8 +48,8 @@
 
   <gazebo reference="front_right_wheel_link">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.01</mu1>
-    <mu2>0.01</mu2>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -110,8 +58,8 @@
 
   <gazebo reference="rear_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.01</mu1>
-    <mu2>0.01</mu2>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -120,11 +68,30 @@
 
   <gazebo reference="rear_right_wheel_link">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.01</mu1>
-    <mu2>0.01</mu2>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
     <maxVel>1.0</maxVel>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="mecanum_gazebo" filename="libmecanum_force_plugin.so">
+      <wheelJointName>front_left_wheel</wheelJointName>
+      <forceScaleFactor>1</forceScaleFactor>
+    </plugin>
+    <plugin name="mecanum_gazebo" filename="libmecanum_force_plugin.so">
+      <wheelJointName>front_right_wheel</wheelJointName>
+      <forceScaleFactor>-1</forceScaleFactor>
+    </plugin>
+    <plugin name="mecanum_gazebo" filename="libmecanum_force_plugin.so">
+      <wheelJointName>rear_left_wheel</wheelJointName>
+      <forceScaleFactor>-1</forceScaleFactor>
+    </plugin>
+    <plugin name="mecanum_gazebo" filename="libmecanum_force_plugin.so">
+      <wheelJointName>rear_right_wheel</wheelJointName>
+      <forceScaleFactor>1</forceScaleFactor>
+    </plugin>
   </gazebo>
 </robot>
