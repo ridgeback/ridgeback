@@ -134,6 +134,8 @@ private:
   bool use_realigned_roller_joints_;
   double wheels_k_; // wheels geometric param used in mecanum wheels' ik
   double wheels_radius_;
+  double wheel_separation_x_;
+  double wheel_separation_y_;
 
   /// Timeout to consider cmd_vel commands old:
   double cmd_vel_timeout_;
@@ -174,6 +176,7 @@ private:
    * \param wheel3_name Name of wheel3 joint
    */
   bool setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
+                             ros::NodeHandle &controller_nh,
                              const std::string& wheel0_name,
                              const std::string& wheel1_name,
                              const std::string& wheel2_name,

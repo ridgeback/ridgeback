@@ -171,7 +171,7 @@ bool MecanumDriveController::init(hardware_interface::VelocityJointInterface* hw
   wheel3_jointHandle_ = hw->getHandle(wheel3_name);  // throws on failure
 
   // Pass params through and setup publishers and subscribers
-  if (!setWheelParamsFromUrdf(root_nh, wheel0_name, wheel1_name, wheel2_name, wheel3_name))
+  if (!setWheelParamsFromUrdf(root_nh, controller_nh, wheel0_name, wheel1_name, wheel2_name, wheel3_name))
     return false;
 
   setupRtPublishersMsg(root_nh, controller_nh);
@@ -322,6 +322,7 @@ void MecanumDriveController::cmdVelCallback(const geometry_msgs::Twist& command)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
+                                                   ros::NodeHandle &controller_nh,
                                                    const std::string& wheel0_name,
                                                    const std::string& wheel1_name,
                                                    const std::string& wheel2_name,
@@ -369,54 +370,85 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
     return false;
   }
 
-  ROS_INFO_STREAM("wheel0 to origin: "  << wheel0_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                        << wheel0_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                        << wheel0_urdfJoint->parent_to_joint_origin_transform.position.z);
-  ROS_INFO_STREAM("wheel1 to origin: "  << wheel1_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                        << wheel1_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                        << wheel1_urdfJoint->parent_to_joint_origin_transform.position.z);
-  ROS_INFO_STREAM("wheel2 to origin: "  << wheel2_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                        << wheel2_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                        << wheel2_urdfJoint->parent_to_joint_origin_transform.position.z);
-  ROS_INFO_STREAM("wheel3 to origin: "  << wheel3_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                        << wheel3_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                        << wheel3_urdfJoint->parent_to_joint_origin_transform.position.z);
+  bool has_wheel_separation_x = !controller_nh.getParam("wheel_separation_x", wheel_separation_x_);
+  bool has_wheel_separation_y = !controller_nh.getParam("wheel_separation_y", wheel_separation_y_);
 
-  double wheel0_x = wheel0_urdfJoint->parent_to_joint_origin_transform.position.x;
-  double wheel0_y = wheel0_urdfJoint->parent_to_joint_origin_transform.position.y;
-  double wheel1_x = wheel1_urdfJoint->parent_to_joint_origin_transform.position.x;
-  double wheel1_y = wheel1_urdfJoint->parent_to_joint_origin_transform.position.y;
-  double wheel2_x = wheel2_urdfJoint->parent_to_joint_origin_transform.position.x;
-  double wheel2_y = wheel2_urdfJoint->parent_to_joint_origin_transform.position.y;
-  double wheel3_x = wheel3_urdfJoint->parent_to_joint_origin_transform.position.x;
-  double wheel3_y = wheel3_urdfJoint->parent_to_joint_origin_transform.position.y;
-
-  wheels_k_ = (-(-wheel0_x - wheel0_y) - (wheel1_x - wheel1_y) + (-wheel2_x - wheel2_y) + (wheel3_x - wheel3_y)) / 4.0;
-
-  // Get wheels radius
-  double wheel0_radius = 0.0;
-  double wheel1_radius = 0.0;
-  double wheel2_radius = 0.0;
-  double wheel3_radius = 0.0;
-
-  if (!getWheelRadius(model, model->getLink(wheel0_urdfJoint->child_link_name), wheel0_radius) ||
-      !getWheelRadius(model, model->getLink(wheel1_urdfJoint->child_link_name), wheel1_radius) ||
-      !getWheelRadius(model, model->getLink(wheel2_urdfJoint->child_link_name), wheel2_radius) ||
-      !getWheelRadius(model, model->getLink(wheel3_urdfJoint->child_link_name), wheel3_radius))
+  // Check to see if both X and Y separations are overrided.
+  if ((has_wheel_separation_x && !has_wheel_separation_y) || (!has_wheel_separation_x && has_wheel_separation_y))
   {
-    ROS_ERROR_STREAM_NAMED(name_, "Couldn't retrieve wheels' radius");
+    ROS_ERROR_STREAM_NAMED(name_, "Only one wheel separation overrided");
     return false;
   }
 
-  if (abs(wheel0_radius - wheel1_radius) > 1e-3 ||
-      abs(wheel0_radius - wheel2_radius) > 1e-3 ||
-      abs(wheel0_radius - wheel3_radius) > 1e-3)
+  bool lookup_wheel_separation = has_wheel_separation_x && has_wheel_separation_y;
+  bool lookup_wheel_radius = !controller_nh.getParam("wheel_radius", wheels_radius_);
+
+  if (lookup_wheel_separation)
   {
-    ROS_ERROR_STREAM_NAMED(name_, "Wheels radius are not egual");
-    return false;
+    ROS_INFO_STREAM("wheel0 to origin: "  << wheel0_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                          << wheel0_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                          << wheel0_urdfJoint->parent_to_joint_origin_transform.position.z);
+    ROS_INFO_STREAM("wheel1 to origin: "  << wheel1_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                          << wheel1_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                          << wheel1_urdfJoint->parent_to_joint_origin_transform.position.z);
+    ROS_INFO_STREAM("wheel2 to origin: "  << wheel2_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                          << wheel2_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                          << wheel2_urdfJoint->parent_to_joint_origin_transform.position.z);
+    ROS_INFO_STREAM("wheel3 to origin: "  << wheel3_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                          << wheel3_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                          << wheel3_urdfJoint->parent_to_joint_origin_transform.position.z);
+
+    double wheel0_x = wheel0_urdfJoint->parent_to_joint_origin_transform.position.x;
+    double wheel0_y = wheel0_urdfJoint->parent_to_joint_origin_transform.position.y;
+    double wheel1_x = wheel1_urdfJoint->parent_to_joint_origin_transform.position.x;
+    double wheel1_y = wheel1_urdfJoint->parent_to_joint_origin_transform.position.y;
+    double wheel2_x = wheel2_urdfJoint->parent_to_joint_origin_transform.position.x;
+    double wheel2_y = wheel2_urdfJoint->parent_to_joint_origin_transform.position.y;
+    double wheel3_x = wheel3_urdfJoint->parent_to_joint_origin_transform.position.x;
+    double wheel3_y = wheel3_urdfJoint->parent_to_joint_origin_transform.position.y;
+
+    wheels_k_ = (-(-wheel0_x - wheel0_y) - (wheel1_x - wheel1_y) + (-wheel2_x - wheel2_y) + (wheel3_x - wheel3_y))
+                / 4.0;
+  }
+  else
+  {
+    ROS_INFO_STREAM("Wheel seperation in X: " << wheel_separation_x_);
+    ROS_INFO_STREAM("Wheel seperation in Y: " << wheel_separation_y_);
+
+    // The seperation is the total distance between the wheels in X and Y.
+
+    wheels_k_ = (wheel_separation_x_ + wheel_separation_y_) / 2.0;
   }
 
-  wheels_radius_ = wheel0_radius;
+
+  if (lookup_wheel_radius)
+  {
+    // Get wheels radius
+    double wheel0_radius = 0.0;
+    double wheel1_radius = 0.0;
+    double wheel2_radius = 0.0;
+    double wheel3_radius = 0.0;
+
+    if (!getWheelRadius(model, model->getLink(wheel0_urdfJoint->child_link_name), wheel0_radius) ||
+        !getWheelRadius(model, model->getLink(wheel1_urdfJoint->child_link_name), wheel1_radius) ||
+        !getWheelRadius(model, model->getLink(wheel2_urdfJoint->child_link_name), wheel2_radius) ||
+        !getWheelRadius(model, model->getLink(wheel3_urdfJoint->child_link_name), wheel3_radius))
+    {
+      ROS_ERROR_STREAM_NAMED(name_, "Couldn't retrieve wheels' radius");
+      return false;
+    }
+
+    if (abs(wheel0_radius - wheel1_radius) > 1e-3 ||
+        abs(wheel0_radius - wheel2_radius) > 1e-3 ||
+        abs(wheel0_radius - wheel3_radius) > 1e-3)
+    {
+      ROS_ERROR_STREAM_NAMED(name_, "Wheels radius are not egual");
+      return false;
+    }
+
+    wheels_radius_ = wheel0_radius;
+  }
+
 
   ROS_INFO_STREAM("Wheel radius: " << wheels_radius_);
 
@@ -427,7 +459,8 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool MecanumDriveController::getWheelRadius(const boost::shared_ptr<urdf::ModelInterface> model, const boost::shared_ptr<const urdf::Link>& wheel_link, double& wheel_radius)
+bool MecanumDriveController::getWheelRadius(const boost::shared_ptr<urdf::ModelInterface> model,
+                                            const boost::shared_ptr<const urdf::Link>& wheel_link, double& wheel_radius)
 {
   boost::shared_ptr<const urdf::Link> radius_link = wheel_link;
 
@@ -437,14 +470,16 @@ bool MecanumDriveController::getWheelRadius(const boost::shared_ptr<urdf::ModelI
       const boost::shared_ptr<const urdf::Joint>& roller_joint = radius_link->child_joints[0];
       if(!roller_joint)
       {
-        ROS_ERROR_STREAM_NAMED(name_, "No roller joint could be retrieved for wheel : " << wheel_link->name << ". Are you sure mecanum wheels are simulated using realigned rollers?");
+        ROS_ERROR_STREAM_NAMED(name_, "No roller joint could be retrieved for wheel : " << wheel_link->name <<
+          ". Are you sure mecanum wheels are simulated using realigned rollers?");
         return false;
       }
 
       radius_link = model->getLink(roller_joint->child_link_name);
       if(!radius_link)
       {
-        ROS_ERROR_STREAM_NAMED(name_, "No roller link could be retrieved for wheel : " << wheel_link->name << ". Are you sure mecanum wheels are simulated using realigned rollers?");
+        ROS_ERROR_STREAM_NAMED(name_, "No roller link could be retrieved for wheel : " << wheel_link->name <<
+          ". Are you sure mecanum wheels are simulated using realigned rollers?");
         return false;
       }
   }
