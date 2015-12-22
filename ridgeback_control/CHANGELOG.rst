@@ -2,6 +2,11 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added wheel separation override.
+* Contributors: Tony Baltovski
+
 0.1.1 (2015-12-01)
 ------------------
 
