@@ -13,16 +13,16 @@
   <xacro:include filename="$(find ridgeback_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro" />
 
   <!-- If enabled, generate the front LASER payload (by default enabled and a SICK LMS111). -->
-  <xacro:if value="$(optenv RIDGEBACK_FRONT_LASER 0)">
-    <xacro:sick_lms1xx_mount prefix="$(optenv RIDGEBACK_FRONT_LASER_MOUNT front)"
-                            topic="$(optenv RIDGEBACK_FRONT_LASER_TOPIC front/scan)"
+  <xacro:if value="$(optenv RIDGEBACK_FRONT_SICK_LASER 0)">
+    <xacro:sick_lms1xx_mount prefix="front"
+                            topic="front/scan"
                             location="1" />
   </xacro:if>
 
   <!-- If enabled, generate the rear LASER payload (by default, a SICK LMS111). -->
-  <xacro:if value="$(optenv RIDGEBACK_REAR_LASER 0)">
-    <xacro:sick_lms1xx_mount prefix="$(optenv RIDGEBACK_REAR__LASER_MOUNT rear)"
-                            topic="$(optenv RIDGEBACK_REAR_LASER_TOPIC rear/scan)"
+  <xacro:if value="$(optenv RIDGEBACK_REAR_SICK_LASER 0)">
+    <xacro:sick_lms1xx_mount prefix="rear"
+                            topic="rear/scan"
                             location="-1" />
   </xacro:if>
 

@@ -8,9 +8,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
   FILES
-  Drive.msg
-  DriveFeedback.msg
-  Feedback.msg
+  Fans.msg
+  Lights.msg
+  RGB.msg
   Status.msg
 )
 
