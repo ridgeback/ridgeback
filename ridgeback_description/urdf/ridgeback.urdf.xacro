@@ -12,6 +12,7 @@
   <xacro:property name="chassis_length" value="0.935" />
   <xacro:property name="chassis_width" value="0.787" />
   <xacro:property name="chassis_height" value="0.216" />
+  <xacro:property name="deck_height" value="0.280" />
 
   <xacro:property name="axle_offset" value="0.0500" />
   <xacro:property name="rocker_offset" value="0.301525" />
@@ -24,7 +25,7 @@
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
 
-  <xacro:macro name="wheel" params="prefix side y_friction *joint_pose">
+  <xacro:macro name="wheel" params="prefix side *joint_pose">
     <link name="${prefix}_${side}_wheel_link">
       <visual>
         <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
@@ -95,11 +96,11 @@
       <xacro:insert_block name="joint_limits" />
     </joint>
 
-    <xacro:wheel prefix="${prefix}" side="left" y_friction="-0.707107">
+    <xacro:wheel prefix="${prefix}" side="left">
       <origin xyz="0 ${rocker_width/2 + wheel_width/2} 0" rpy="0 0 0" />
     </xacro:wheel>
-    <xacro:wheel prefix="${prefix}" side="right" y_friction="0.707107">
-      <origin xyz="0 ${-rocker_width/2 - wheel_width/2} 0" rpy="0 0 0" />
+    <xacro:wheel prefix="${prefix}" side="right">
+      <origin xyz="0 ${-(rocker_width/2 + wheel_width/2)} 0" rpy="0 0 0" />
     </xacro:wheel>
   </xacro:macro>
 
@@ -128,7 +129,7 @@
       <material name="black" />
     </visual>
     <collision>
-      <origin xyz="0 0  ${chassis_height/2}"/>
+      <origin xyz="0 0 ${chassis_height/2}"/>
       <geometry>
         <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
@@ -207,11 +208,6 @@
     </visual>
   </link>
 
-
-  <!-- TODO: Make this internal_imu_link or something, and use a mixed-in xacro
-       to supply the joint between it and imu_link. This is important so that imu_link
-       always points to the "active" IMU. When an upgrade IMU is connected, the
-       internal_imu_link should remain, but imu_link should point to the upgrade one. -->
   <link name="imu_link">
     <inertial>
       <mass value="0.001"/>
@@ -224,13 +220,20 @@
     <child link="imu_link" />
   </joint>
 
+  <link name="mid_mount" />
+  <joint name="mid_mount_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="mid_mount" />
+    <origin xyz="0 0 ${deck_height}" rpy="0 0 0"/>
+  </joint>
+
   <!-- Bring in simulation data for Gazebo. -->
-  <xacro:include filename="ridgeback.gazebo" />
+  <xacro:include filename="$(find ridgeback_description)/urdf/ridgeback.gazebo" />
 
   <!-- Optional standard accessories, including their simulation data. The rendering
        of these into the final description is controlled by optenv variables, which
        default each one to off.-->
-  <xacro:include filename="accessories.urdf.xacro" />
+  <xacro:include filename="$(find ridgeback_description)/urdf/accessories.urdf.xacro" />
 
   <!-- Optional custom includes. -->
   <!--<xacro:include filename="$(optenv RIDGEBACK_URDF_EXTRAS empty.urdf)" />-->
