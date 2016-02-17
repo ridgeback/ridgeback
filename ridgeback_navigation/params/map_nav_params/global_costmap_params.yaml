@@ -13,7 +13,5 @@ global_costmap:
    
    plugins:
    - {name: static_layer, type: "costmap_2d::StaticLayer"}
-   - {name: footprint_layer, type: "costmap_2d::FootprintLayer"}
    - {name: obstacles_layer, type: "costmap_2d::ObstacleLayer"}
    - {name: inflater_layer, type: "costmap_2d::InflationLayer"}
-
