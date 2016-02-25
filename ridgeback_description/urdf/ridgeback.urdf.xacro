@@ -2,21 +2,17 @@
 <robot name="ridgeback" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:property name="PI" value="3.1415926535897931" />
 
-  <xacro:property name="wheelbase" value="0.610" />
-  <xacro:property name="track" value="0.622" />
-  <xacro:property name="wheel_vertical_offset" value="0.05" />
-
   <xacro:property name="wheel_radius" value="0.0759" />
-  <xacro:property name="wheel_width" value="0.0471" />
+  <xacro:property name="wheel_width" value="0.0790" />
 
-  <xacro:property name="chassis_length" value="0.935" />
-  <xacro:property name="chassis_width" value="0.787" />
+  <xacro:property name="chassis_length" value="0.960" />
+  <xacro:property name="chassis_width" value="0.793" />
   <xacro:property name="chassis_height" value="0.216" />
   <xacro:property name="deck_height" value="0.280" />
 
   <xacro:property name="axle_offset" value="0.0500" />
-  <xacro:property name="rocker_offset" value="0.301525" />
-  <xacro:property name="rocker_width" value="0.568" />
+  <xacro:property name="rocker_offset" value="0.319" />
+  <xacro:property name="rocker_width" value="0.472" />
 
   <xacro:property name="dummy_inertia" value="1e-09"/>
 

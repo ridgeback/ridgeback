@@ -14,8 +14,8 @@ ridgeback_velocity_controller:
   cmd_vel_timeout: 0.25
 
   # Override URDF look-up for wheel separation since the parent link is not the base_link.
-  wheel_separation_x: 0.56
-  wheel_separation_y: 0.64
+  wheel_separation_x: 0.638
+  wheel_separation_y: 0.551
 
   # Odometry fused with IMU is published by robot_localization, so
   # no need to publish a TF based on encoders alone.
