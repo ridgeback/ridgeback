@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.3 (2016-03-02)
+------------------
 * Updated URDF for physical changes.
 * Updated control limits.
 * Removed yaw estimate from robot_localization.
