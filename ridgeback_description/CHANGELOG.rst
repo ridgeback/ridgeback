@@ -2,6 +2,12 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated URDF for physical changes.
+* Simulation using gazebo_ros_force_based_move.
+* Contributors: Mike Purvis, Tony Baltovski
+
 0.1.2 (2015-12-22)
 ------------------
 

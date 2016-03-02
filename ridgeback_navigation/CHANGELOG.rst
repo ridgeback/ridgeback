@@ -2,6 +2,13 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Removed CATKIN_IGNORE from ridgeback_navigation.
+* ridgeback_navigation: remove deprecated footprint layer
+* Simulation using gazebo_ros_force_based_move.
+* Contributors: Achim Krauch, Mike Purvis, Tony Baltovski
+
 0.1.2 (2015-12-22)
 ------------------
 
