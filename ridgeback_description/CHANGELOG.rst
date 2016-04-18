@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.4 (2016-04-18)
+------------------
 * Added lms1xx as run dependency.
 * Contributors: Tony Baltovski
 
