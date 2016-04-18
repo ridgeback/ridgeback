@@ -2,6 +2,9 @@
 Changelog for package ridgeback_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.3 (2016-03-02)
 ------------------
 
