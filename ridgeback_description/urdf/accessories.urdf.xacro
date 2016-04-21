@@ -11,43 +11,34 @@
   -->
 
   <xacro:include filename="$(find ridgeback_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro" />
+  <xacro:include filename="$(find ridgeback_description)/urdf/accessories/hokuyo_ust-10lx_mount.urdf.xacro" />
 
-  <!-- If enabled, generate the front LASER payload (by default enabled and a SICK LMS111). -->
+  <!-- If enabled, generate the front HOKUYO UST-10LX LASER payload. -->
+  <xacro:if value="$(optenv RIDGEBACK_FRONT_HOKUYO_LASER 0)">
+    <xacro:hokuyo_ust-10lx_mount prefix="front"
+                            topic="front/scan"
+                            location="1" />
+  </xacro:if>
+
+  <!-- If enabled, generate the rear HOKUYO UST-10LX LASER payload. -->
+  <xacro:if value="$(optenv RIDGEBACK_REAR_HOKUYO_LASER 0)">
+    <xacro:hokuyo_ust-10lx_mount prefix="rear"
+                            topic="rear/scan"
+                            location="-1" />
+  </xacro:if>
+
+  <!-- If enabled, generate the front SICK LMS111 LASER payload. -->
   <xacro:if value="$(optenv RIDGEBACK_FRONT_SICK_LASER 0)">
     <xacro:sick_lms1xx_mount prefix="front"
                             topic="front/scan"
                             location="1" />
   </xacro:if>
 
-  <!-- If enabled, generate the rear LASER payload (by default, a SICK LMS111). -->
+  <!-- If enabled, generate the rear SICK LMS111 LASER payload. -->
   <xacro:if value="$(optenv RIDGEBACK_REAR_SICK_LASER 0)">
     <xacro:sick_lms1xx_mount prefix="rear"
                             topic="rear/scan"
                             location="-1" />
   </xacro:if>
 
-  <!--
-  <xacro:include filename="accessories/point_grey_flea.urdf.xacro" />
-
-  <xacro:if value="$(arg camera)">
-    <xacro:point_grey_flea3
-      prefix="front"
-      joint_parent="front_mount"
-      joint_xyz="0.135 0 0.015"
-      joint_rpy="0 0 0"
-      camera_x="0.0754"
-      camera_y="0.029"
-      camera_z="0.035"
-      camera_mass="0.085"
-      hfov="1.0471975512"
-      width="640"
-      height="512"
-      format="R8G8B8"
-      near="0.1"
-      far="300"
-      ns="ridgeback"
-      frame_id="front_mount"
-      />
-  </xacro:if>
-  -->
 </robot>
