@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.5 (2016-04-22)
+------------------
 * Added support for Hokuyo URG-10LX.
 * Contributors: Tony Baltovski
 
