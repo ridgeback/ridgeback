@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
   <!--
     As you add to this URDF, please be aware that both the robot and
     simulation include it. You must retain compatibility with all of
