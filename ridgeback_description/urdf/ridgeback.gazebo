@@ -5,7 +5,7 @@
       <robotNamespace>/</robotNamespace>
     </plugin>
 
-    <plugin name="gazebo_ros_force_based_move" filename="libgazebo_ros_force_based_move.so">
+    <plugin name="ridgeback_ros_force_based_move" filename="libridgeback_ros_force_based_move.so">
       <robotBaseFrame>base_link</robotBaseFrame>
 
       <!-- Don't publish a transform: the controller does it. -->
