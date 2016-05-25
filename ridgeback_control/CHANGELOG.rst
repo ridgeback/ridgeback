@@ -2,6 +2,11 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added support for PS4 controller.
+* Contributors: Tony Baltovski
+
 0.1.5 (2016-04-22)
 ------------------
 
