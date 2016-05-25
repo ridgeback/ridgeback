@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.6 (2016-05-25)
+------------------
 * Added params for hector_gazebo_plugins/gazebo_ros_force_based_move.
 * Using ros_force_based_move from ridgeback_simulator.
 * Fixed xacro xmlns declaration and added Hokuyo minimun intensity.

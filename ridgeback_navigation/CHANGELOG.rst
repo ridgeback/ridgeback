@@ -2,8 +2,8 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.6 (2016-05-25)
+------------------
 * Updated laser scan topic and robot footprint.  Also, enabled holonomic motion.
 * Contributors: Tony Baltovski
 
