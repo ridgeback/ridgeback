@@ -7,7 +7,7 @@ teleop_twist_joy:
     x: 0.4
     y: 0.4
   axis_angular:
-    yaw: 2
+    yaw: 3
   scale_angular:
     yaw: 0.5
   enable_button: 4
