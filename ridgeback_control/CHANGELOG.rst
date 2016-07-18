@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.7 (2016-07-18)
+------------------
 * Fixed teleop angular axis for PS4.
 * Contributors: Tony Baltovski
 

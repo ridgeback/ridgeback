@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.7 (2016-07-18)
+------------------
 * Removed unused mesh.
 * Uncommented RIDGEBACK_URDF_EXTRAS include.
 * Contributors: Tony Baltovski
