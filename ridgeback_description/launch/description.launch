@@ -1,5 +1,5 @@
 <launch>
-  <arg name="config" default="base" />
+  <arg name="config" default="$(optenv RIDGEBACK_CONFIG empty)" />
 
   <param name="robot_description"
          command="$(find ridgeback_description)/scripts/env_run
