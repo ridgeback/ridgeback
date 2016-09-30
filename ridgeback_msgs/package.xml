@@ -3,7 +3,7 @@
   <name>ridgeback_msgs</name>
   <version>0.1.8</version>
   <description>Messages exclusive to Ridgeback, especially for representing low-level motor commands and sensors.</description>
-  <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
+  <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
 
   <license>BSD</license>
 
