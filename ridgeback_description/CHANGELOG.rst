@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.8 (2016-09-30)
+------------------
 * Added environment variable to set the robot configuration and empty configuration.
 * Added cmd_vel timeout for force based move plugin.
 * Contributors: Tony Baltovski
