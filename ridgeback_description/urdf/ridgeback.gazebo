@@ -52,27 +52,34 @@
   <gazebo reference="top_link"><material>Gazebo/DarkGrey</material></gazebo>
   <gazebo reference="front_cover_link"><material>Gazebo/DarkGrey</material></gazebo>
   <gazebo reference="rear_cover_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="front_rocker_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="rear_rocker_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="axle_link"><material>Gazebo/DarkGrey</material></gazebo>
 
   <!-- Wheel friction to zero, as movement is handled by applying forces at
        the body level. -->
   <gazebo reference="front_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
     <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
   </gazebo>
 
   <gazebo reference="front_right_wheel_link">
     <material>Gazebo/DarkGrey</material>
     <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
   </gazebo>
 
   <gazebo reference="rear_left_wheel_link">
     <material>Gazebo/DarkGrey</material>
     <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
   </gazebo>
 
   <gazebo reference="rear_right_wheel_link">
     <material>Gazebo/DarkGrey</material>
     <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
   </gazebo>
 
   <!-- This is an wheel-level solution to possibly revisit at a future date. -->
