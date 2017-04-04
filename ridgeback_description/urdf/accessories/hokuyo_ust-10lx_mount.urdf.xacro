@@ -35,7 +35,7 @@
     </link>
 
     <gazebo reference="${prefix}_laser">
-      <turnGravityOff>true</turnGravityOff>
+      <turnGravityOff>false</turnGravityOff>
       <sensor type="ray" name="${prefix}_laser">
         <pose>0 0 0 0 0 0</pose>
         <visualize>false</visualize>
@@ -66,6 +66,7 @@
           <hokuyoMinIntensity>101</hokuyoMinIntensity>
         </plugin>
       </sensor>
+      <material>Gazebo/DarkGrey</material>
     </gazebo>
 
   </xacro:macro>
