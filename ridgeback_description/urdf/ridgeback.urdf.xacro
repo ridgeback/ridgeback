@@ -129,9 +129,9 @@
       <material name="black" />
     </visual>
     <collision>
-      <origin xyz="0 0 ${deck_height/2}"/>
+      <origin xyz="0 0 ${chassis_height/2}"/>
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${deck_height}"/>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
     </collision>
     <inertial>
