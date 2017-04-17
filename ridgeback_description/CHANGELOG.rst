@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.9 (2017-04-17)
+------------------
 * Fixed malformed stl meshes.
 * Reduced gyroscopes noise.
 * Reverted dimensions of chassis collision mesh to allow laser rays out.
