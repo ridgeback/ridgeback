@@ -2,6 +2,11 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated maintainer.
+* Contributors: Tony Baltovski
+
 0.1.8 (2016-09-30)
 ------------------
 

@@ -2,6 +2,17 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fixed malformed stl meshes.
+* Reduced gyroscopes noise.
+* Reverted dimensions of chassis collision mesh to allow laser rays out.
+* Added Sick S300 laser and Microstrain IMU upgrade accessories.
+* Updated material properties for Ridgeback.
+* Fixed IMU offset.
+* Updated maintainer.
+* Contributors: Tony Baltovski
+
 0.1.8 (2016-09-30)
 ------------------
 * Added environment variable to set the robot configuration and empty configuration.
