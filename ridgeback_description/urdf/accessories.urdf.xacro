@@ -11,6 +11,7 @@
   -->
 
   <xacro:include filename="$(find ridgeback_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro" />
+  <xacro:include filename="$(find ridgeback_description)/urdf/accessories/sick_s300_mount.urdf.xacro" />
   <xacro:include filename="$(find ridgeback_description)/urdf/accessories/hokuyo_ust-10lx_mount.urdf.xacro" />
 
   <!-- If enabled, generate the front HOKUYO UST-10LX LASER payload. -->
@@ -46,14 +47,14 @@
        This uses the same mesh as the lms1xx since they are the footprint
        and the simulation parameters can be variable. -->
   <xacro:if value="$(optenv RIDGEBACK_FRONT_S300_LASER 0)">
-    <xacro:sick_lms1xx_mount prefix="front"
+    <xacro:sick_s300_mount prefix="front"
                              topic="front/scan"
                              location="1" />
   </xacro:if>
 
   <!-- If enabled, generate the rear SICK S300 LASER payload. -->
   <xacro:if value="$(optenv RIDGEBACK_REAR_S300_LASER 0)">
-    <xacro:sick_lms1xx_mount prefix="rear"
+    <xacro:sick_s300_mount prefix="rear"
                              topic="rear/scan"
                              location="-1" />
   </xacro:if>

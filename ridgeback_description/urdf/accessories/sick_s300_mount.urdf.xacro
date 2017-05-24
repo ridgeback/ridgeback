@@ -30,9 +30,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <xacro:include filename="$(find lms1xx)/urdf/sick_lms1xx.urdf.xacro" />
 
-  <xacro:macro name="sick_lms1xx_mount" params="prefix topic location">
+  <xacro:macro name="sick_s300_mount" params="prefix topic location">
 
-    <xacro:sick_lms1xx frame="${prefix}_laser" topic="${topic} update_rate="12.5" />
+    <xacro:sick_lms1xx frame="${prefix}_laser" topic="${topic}" update_rate="12.5" />
 
     <joint name="${prefix}_laser_joint" type="fixed">
       <!-- This offset is from the base of the bracket to the LIDAR's focal point. -->
@@ -43,4 +43,4 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   </xacro:macro>
 
-</robot>s
+</robot>
