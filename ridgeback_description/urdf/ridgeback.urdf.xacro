@@ -22,6 +22,8 @@
 
   <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
+  <material name="red"><color rgba="0.8 0.0 0.0 1.0" /></material>
+  <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
 
@@ -122,16 +124,16 @@
 
   <link name="chassis_link">
     <visual>
-      <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/body.stl"/>
       </geometry>
       <material name="black" />
     </visual>
     <collision>
-      <origin xyz="0 0 ${chassis_height/2}"/>
+      <origin xyz="0 0 0"/>
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+        <mesh filename="package://ridgeback_description/meshes/body-collision.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -144,6 +146,36 @@
     </inertial>
   </link>
 
+  <joint name="right_side_cover_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="chassis_link"/>
+    <child link="right_side_cover_link" />
+  </joint>
+  <joint name="left_side_cover_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="chassis_link"/>
+    <child link="left_side_cover_link" />
+  </joint>
+
+  <link name="left_side_cover_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI}" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/side-cover.stl"/>
+      </geometry>
+      <material name="yellow" />
+    </visual>
+  </link>
+  <link name="right_side_cover_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/side-cover.stl"/>
+      </geometry>
+      <material name="yellow" />
+    </visual>
+  </link>
+
   <joint name="front_cover_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="chassis_link"/>
@@ -152,7 +184,7 @@
 
   <link name="front_cover_link">
     <visual>
-      <origin xyz="0 0 0" rpy=" ${PI/2} 0 ${-PI/2}"  />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/end-cover.stl" />
       </geometry>
@@ -168,11 +200,41 @@
 
   <link name="rear_cover_link">
     <visual>
-      <origin xyz="0 0 0" rpy=" ${PI/2} 0 ${PI/2}"  />
+      <origin xyz="0 0 0" rpy="0 0 ${PI}" />
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/end-cover.stl" />
       </geometry>
       <material name="black" />
+    </visual>
+  </link>
+
+  <joint name="front_lights_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="chassis_link"/>
+    <child link="front_lights_link" />
+  </joint>
+  <joint name="rear_lights_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="chassis_link"/>
+    <child link="rear_lights_link" />
+  </joint>
+
+  <link name="front_lights_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/lights.stl" />
+      </geometry>
+      <material name="white" />
+    </visual>
+  </link>
+  <link name="rear_lights_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI}" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/lights.stl" />
+      </geometry>
+      <material name="red" />
     </visual>
   </link>
 
@@ -184,12 +246,18 @@
 
   <link name="top_link">
     <visual>
-      <origin xyz="${-chassis_length/2} ${-chassis_width/2} 0" rpy=" ${PI/2} 0 ${PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/top.stl" />
       </geometry>
       <material name="black" />
     </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ridgeback_description/meshes/top.stl"/>
+      </geometry>
+    </collision>
   </link>
 
   <joint name="axle_joint" type="fixed">
