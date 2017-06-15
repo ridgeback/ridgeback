@@ -1,4 +1,4 @@
-ridgeback
+ridgeback for kinetic
 ======
 
 Common packages for Ridgeback, including messages and robot description. These are packages relevant
