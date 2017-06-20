@@ -1,4 +1,6 @@
-ridgeback_robot
-============
 
-Robot packages for Ridgeback
+=======
+ridgeback for kinetic
+======
+
+Ridgeback monolithic repository.
