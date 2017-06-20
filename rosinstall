@@ -1,0 +1,5 @@
+- git: {local-name: ridgeback, uri: 'https://github.com/ridgeback/ridgeback', version: indigo-devel}
+- git: {local-name: robot_localization, uri: 'https://github.com/cra-ros-pkg/robot_localization',
+    version: master}
+
+

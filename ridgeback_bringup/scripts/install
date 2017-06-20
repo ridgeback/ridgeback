@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import os
+import robot_upstart
+
+from catkin.find_in_workspaces import find_in_workspaces
+
+main_job = robot_upstart.Job(workspace_setup=os.environ['ROBOT_SETUP'])
+main_job.add(package="ridgeback_base", filename="launch/base.launch")
+main_job.add(package="ridgeback_bringup", filename="launch/accessories.launch")
+main_job.install()
+
+
+class RidgebackExtras(robot_upstart.providers.Generic):
+    def generate_install(self):
+        with open(find_in_workspaces(project="ridgeback_bringup", path="can-udp-bridge.conf")[0]) as f:
+            can_conf_contents = f.read()
+        return { "/etc/init/can-udp-bridge.conf": {
+            "content":  can_conf_contents,
+            "mode": 0o644
+            },
+            "/etc/connman/main.conf": {
+                "content": """[General]
+NetworkInterfaceBlacklist=eth,br
+PreferredTechnologies=wifi""",
+                "mode": 0o644
+                }}
+
+
+other_job = robot_upstart.Job()
+other_job.install(Provider=RidgebackExtras)
