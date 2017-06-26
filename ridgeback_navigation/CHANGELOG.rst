@@ -2,6 +2,9 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.9 (2017-04-17)
 ------------------
 * Changed amcl odom model type to omni-corrected.

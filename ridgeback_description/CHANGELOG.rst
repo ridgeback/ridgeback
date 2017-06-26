@@ -2,6 +2,12 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated the visual meshes to make them lighter and prettier.  More accurate collision mesh made for tight areas
+* Used sick-s300 xacro for simulation.
+* Contributors: Dave Niewinski, Tony Baltovski
+
 0.1.9 (2017-04-17)
 ------------------
 * Fixed malformed stl meshes.
