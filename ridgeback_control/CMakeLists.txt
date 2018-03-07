@@ -28,10 +28,6 @@ include_directories(
 add_library(mecanum_drive_controller ${mecanum_drive_controller_headers} ${mecanum_drive_controller_sources})
 target_link_libraries(mecanum_drive_controller ${catkin_LIBRARIES})
 
-
-roslaunch_add_file_check(launch/control.launch)
-roslaunch_add_file_check(launch/teleop.launch)
-
 install(TARGETS mecanum_drive_controller
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -44,3 +40,9 @@ install(FILES mecanum_drive_controller_plugins.xml
 install(DIRECTORY config launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(roslaunch REQUIRED)
+  roslaunch_add_file_check(launch/control.launch)
+  roslaunch_add_file_check(launch/teleop.launch)
+endif()
