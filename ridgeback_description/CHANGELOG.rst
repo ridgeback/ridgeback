@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.11 (2018-04-12)
+-------------------
 * Updated to Package format 2.
 * Contributors: Tony Baltovski
 
