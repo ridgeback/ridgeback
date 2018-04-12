@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2018-04-12)
+------------------
 * Removed tight default rolling window
 * Updated rolling window for odom responsiveness.  Minor changes to control and urdf syntax for kinetic
 * Updated to Package format 2.
