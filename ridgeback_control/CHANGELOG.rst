@@ -2,6 +2,12 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added support for planar motion using interactive markers.
+* [ridgeback_control] Made PS4 default controller.
+* Contributors: Tony Baltovski
+
 0.2.0 (2018-04-12)
 ------------------
 * Removed tight default rolling window
