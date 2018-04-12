@@ -4,13 +4,13 @@
 
   <group ns="bluetooth_teleop" if="$(arg joystick)">
 
-    <group unless="$(optenv RIDGEBACK_PS4 0)" >
-      <rosparam command="load" file="$(find ridgeback_control)/config/teleop_ps3.yaml" />
-      <param name="joy_node/dev" value="$(arg joy_dev)" />
+    <group unless="$(optenv RIDGEBACK_PS3 0)" >
+      <rosparam command="load" file="$(find ridgeback_control)/config/teleop_ps4.yaml" />
     </group>
 
-    <group if="$(optenv RIDGEBACK_PS4 0)" >
-      <rosparam command="load" file="$(find ridgeback_control)/config/teleop_ps4.yaml" />
+    <group if="$(optenv RIDGEBACK_PS3 0)" >
+      <rosparam command="load" file="$(find ridgeback_control)/config/teleop_ps3.yaml" />
+      <param name="joy_node/dev" value="$(arg joy_dev)" />
     </group>
 
     <node pkg="joy" type="joy_node" name="joy_node" />
