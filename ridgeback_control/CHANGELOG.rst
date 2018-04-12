@@ -2,6 +2,12 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated to Package format 2.
+* [ridgeback_control] Added ability to override default control parameters with environment variables.
+* Contributors: Tony Baltovski
+
 0.1.10 (2017-06-26)
 -------------------
 

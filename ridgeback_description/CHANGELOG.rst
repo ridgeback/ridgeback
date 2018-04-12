@@ -2,6 +2,11 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated to Package format 2.
+* Contributors: Tony Baltovski
+
 0.1.10 (2017-06-26)
 -------------------
 * Updated the visual meshes to make them lighter and prettier.  More accurate collision mesh made for tight areas
