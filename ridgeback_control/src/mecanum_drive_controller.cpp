@@ -328,48 +328,6 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
                                                    const std::string& wheel2_name,
                                                    const std::string& wheel3_name)
 {
-  // Parse robot description
-  const std::string model_param_name = "robot_description";
-  bool res = root_nh.hasParam(model_param_name);
-  std::string robot_model_str="";
-  if(!res || !root_nh.getParam(model_param_name,robot_model_str))
-  {
-    ROS_ERROR_NAMED(name_, "Robot descripion couldn't be retrieved from param server.");
-    return false;
-  }
-
-  boost::shared_ptr<urdf::ModelInterface> model(urdf::parseURDF(robot_model_str));
-
-  // Get wheels position and compute parameter k_ (used in mecanum wheels IK).
-  boost::shared_ptr<const urdf::Joint> wheel0_urdfJoint(model->getJoint(wheel0_name));
-  if(!wheel0_urdfJoint)
-  {
-    ROS_ERROR_STREAM_NAMED(name_, wheel0_name
-                           << " couldn't be retrieved from model description");
-    return false;
-  }
-  boost::shared_ptr<const urdf::Joint> wheel1_urdfJoint(model->getJoint(wheel1_name));
-  if(!wheel1_urdfJoint)
-  {
-    ROS_ERROR_STREAM_NAMED(name_, wheel1_name
-                           << " couldn't be retrieved from model description");
-    return false;
-  }
-  boost::shared_ptr<const urdf::Joint> wheel2_urdfJoint(model->getJoint(wheel2_name));
-  if(!wheel2_urdfJoint)
-  {
-    ROS_ERROR_STREAM_NAMED(name_, wheel2_name
-                           << " couldn't be retrieved from model description");
-    return false;
-  }
-  boost::shared_ptr<const urdf::Joint> wheel3_urdfJoint(model->getJoint(wheel3_name));
-  if(!wheel3_urdfJoint)
-  {
-    ROS_ERROR_STREAM_NAMED(name_, wheel3_name
-                           << " couldn't be retrieved from model description");
-    return false;
-  }
-
   bool has_wheel_separation_x = !controller_nh.getParam("wheel_separation_x", wheel_separation_x_);
   bool has_wheel_separation_y = !controller_nh.getParam("wheel_separation_y", wheel_separation_y_);
 
@@ -383,32 +341,106 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
   bool lookup_wheel_separation = has_wheel_separation_x && has_wheel_separation_y;
   bool lookup_wheel_radius = !controller_nh.getParam("wheel_radius", wheels_radius_);
 
-  if (lookup_wheel_separation)
+  // Avoid URDF requirement if wheel separation and radius already specified
+  if (lookup_wheel_separation || lookup_wheel_radius)
   {
-    ROS_INFO_STREAM("wheel0 to origin: "  << wheel0_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                          << wheel0_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                          << wheel0_urdfJoint->parent_to_joint_origin_transform.position.z);
-    ROS_INFO_STREAM("wheel1 to origin: "  << wheel1_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                          << wheel1_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                          << wheel1_urdfJoint->parent_to_joint_origin_transform.position.z);
-    ROS_INFO_STREAM("wheel2 to origin: "  << wheel2_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                          << wheel2_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                          << wheel2_urdfJoint->parent_to_joint_origin_transform.position.z);
-    ROS_INFO_STREAM("wheel3 to origin: "  << wheel3_urdfJoint->parent_to_joint_origin_transform.position.x << ","
-                                          << wheel3_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
-                                          << wheel3_urdfJoint->parent_to_joint_origin_transform.position.z);
+    // Parse robot description
+    const std::string model_param_name = "robot_description";
+    bool res = root_nh.hasParam(model_param_name);
+    std::string robot_model_str="";
+    if(!res || !root_nh.getParam(model_param_name,robot_model_str))
+    {
+      ROS_ERROR_NAMED(name_, "Robot descripion couldn't be retrieved from param server.");
+      return false;
+    }
 
-    double wheel0_x = wheel0_urdfJoint->parent_to_joint_origin_transform.position.x;
-    double wheel0_y = wheel0_urdfJoint->parent_to_joint_origin_transform.position.y;
-    double wheel1_x = wheel1_urdfJoint->parent_to_joint_origin_transform.position.x;
-    double wheel1_y = wheel1_urdfJoint->parent_to_joint_origin_transform.position.y;
-    double wheel2_x = wheel2_urdfJoint->parent_to_joint_origin_transform.position.x;
-    double wheel2_y = wheel2_urdfJoint->parent_to_joint_origin_transform.position.y;
-    double wheel3_x = wheel3_urdfJoint->parent_to_joint_origin_transform.position.x;
-    double wheel3_y = wheel3_urdfJoint->parent_to_joint_origin_transform.position.y;
+    boost::shared_ptr<urdf::ModelInterface> model(urdf::parseURDF(robot_model_str));
 
-    wheels_k_ = (-(-wheel0_x - wheel0_y) - (wheel1_x - wheel1_y) + (-wheel2_x - wheel2_y) + (wheel3_x - wheel3_y))
-                / 4.0;
+    // Get wheels position and compute parameter k_ (used in mecanum wheels IK).
+    boost::shared_ptr<const urdf::Joint> wheel0_urdfJoint(model->getJoint(wheel0_name));
+    if(!wheel0_urdfJoint)
+    {
+      ROS_ERROR_STREAM_NAMED(name_, wheel0_name
+                             << " couldn't be retrieved from model description");
+      return false;
+    }
+    boost::shared_ptr<const urdf::Joint> wheel1_urdfJoint(model->getJoint(wheel1_name));
+    if(!wheel1_urdfJoint)
+    {
+      ROS_ERROR_STREAM_NAMED(name_, wheel1_name
+                             << " couldn't be retrieved from model description");
+      return false;
+    }
+    boost::shared_ptr<const urdf::Joint> wheel2_urdfJoint(model->getJoint(wheel2_name));
+    if(!wheel2_urdfJoint)
+    {
+      ROS_ERROR_STREAM_NAMED(name_, wheel2_name
+                             << " couldn't be retrieved from model description");
+      return false;
+    }
+    boost::shared_ptr<const urdf::Joint> wheel3_urdfJoint(model->getJoint(wheel3_name));
+    if(!wheel3_urdfJoint)
+    {
+      ROS_ERROR_STREAM_NAMED(name_, wheel3_name
+                             << " couldn't be retrieved from model description");
+      return false;
+    }
+
+    if (lookup_wheel_separation)
+    {
+      ROS_INFO_STREAM("wheel0 to origin: "  << wheel0_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                            << wheel0_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                            << wheel0_urdfJoint->parent_to_joint_origin_transform.position.z);
+      ROS_INFO_STREAM("wheel1 to origin: "  << wheel1_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                            << wheel1_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                            << wheel1_urdfJoint->parent_to_joint_origin_transform.position.z);
+      ROS_INFO_STREAM("wheel2 to origin: "  << wheel2_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                            << wheel2_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                            << wheel2_urdfJoint->parent_to_joint_origin_transform.position.z);
+      ROS_INFO_STREAM("wheel3 to origin: "  << wheel3_urdfJoint->parent_to_joint_origin_transform.position.x << ","
+                                            << wheel3_urdfJoint->parent_to_joint_origin_transform.position.y << ", "
+                                            << wheel3_urdfJoint->parent_to_joint_origin_transform.position.z);
+
+      double wheel0_x = wheel0_urdfJoint->parent_to_joint_origin_transform.position.x;
+      double wheel0_y = wheel0_urdfJoint->parent_to_joint_origin_transform.position.y;
+      double wheel1_x = wheel1_urdfJoint->parent_to_joint_origin_transform.position.x;
+      double wheel1_y = wheel1_urdfJoint->parent_to_joint_origin_transform.position.y;
+      double wheel2_x = wheel2_urdfJoint->parent_to_joint_origin_transform.position.x;
+      double wheel2_y = wheel2_urdfJoint->parent_to_joint_origin_transform.position.y;
+      double wheel3_x = wheel3_urdfJoint->parent_to_joint_origin_transform.position.x;
+      double wheel3_y = wheel3_urdfJoint->parent_to_joint_origin_transform.position.y;
+
+      wheels_k_ = (-(-wheel0_x - wheel0_y) - (wheel1_x - wheel1_y) + (-wheel2_x - wheel2_y) + (wheel3_x - wheel3_y))
+                  / 4.0;
+    }
+
+    if (lookup_wheel_radius)
+    {
+      // Get wheels radius
+      double wheel0_radius = 0.0;
+      double wheel1_radius = 0.0;
+      double wheel2_radius = 0.0;
+      double wheel3_radius = 0.0;
+
+      if (!getWheelRadius(model, model->getLink(wheel0_urdfJoint->child_link_name), wheel0_radius) ||
+          !getWheelRadius(model, model->getLink(wheel1_urdfJoint->child_link_name), wheel1_radius) ||
+          !getWheelRadius(model, model->getLink(wheel2_urdfJoint->child_link_name), wheel2_radius) ||
+          !getWheelRadius(model, model->getLink(wheel3_urdfJoint->child_link_name), wheel3_radius))
+      {
+        ROS_ERROR_STREAM_NAMED(name_, "Couldn't retrieve wheels' radius");
+        return false;
+      }
+
+      if (abs(wheel0_radius - wheel1_radius) > 1e-3 ||
+          abs(wheel0_radius - wheel2_radius) > 1e-3 ||
+          abs(wheel0_radius - wheel3_radius) > 1e-3)
+      {
+        ROS_ERROR_STREAM_NAMED(name_, "Wheels radius are not egual");
+        return false;
+      }
+
+      wheels_radius_ = wheel0_radius;
+    }
   }
   else
   {
@@ -419,36 +451,6 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
 
     wheels_k_ = (wheel_separation_x_ + wheel_separation_y_) / 2.0;
   }
-
-
-  if (lookup_wheel_radius)
-  {
-    // Get wheels radius
-    double wheel0_radius = 0.0;
-    double wheel1_radius = 0.0;
-    double wheel2_radius = 0.0;
-    double wheel3_radius = 0.0;
-
-    if (!getWheelRadius(model, model->getLink(wheel0_urdfJoint->child_link_name), wheel0_radius) ||
-        !getWheelRadius(model, model->getLink(wheel1_urdfJoint->child_link_name), wheel1_radius) ||
-        !getWheelRadius(model, model->getLink(wheel2_urdfJoint->child_link_name), wheel2_radius) ||
-        !getWheelRadius(model, model->getLink(wheel3_urdfJoint->child_link_name), wheel3_radius))
-    {
-      ROS_ERROR_STREAM_NAMED(name_, "Couldn't retrieve wheels' radius");
-      return false;
-    }
-
-    if (abs(wheel0_radius - wheel1_radius) > 1e-3 ||
-        abs(wheel0_radius - wheel2_radius) > 1e-3 ||
-        abs(wheel0_radius - wheel3_radius) > 1e-3)
-    {
-      ROS_ERROR_STREAM_NAMED(name_, "Wheels radius are not egual");
-      return false;
-    }
-
-    wheels_radius_ = wheel0_radius;
-  }
-
 
   ROS_INFO_STREAM("Wheel radius: " << wheels_radius_);
 
