@@ -328,17 +328,17 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
                                                    const std::string& wheel2_name,
                                                    const std::string& wheel3_name)
 {
-  bool has_wheel_separation_x = !controller_nh.getParam("wheel_separation_x", wheel_separation_x_);
-  bool has_wheel_separation_y = !controller_nh.getParam("wheel_separation_y", wheel_separation_y_);
+  bool has_wheel_separation_x = controller_nh.getParam("wheel_separation_x", wheel_separation_x_);
+  bool has_wheel_separation_y = controller_nh.getParam("wheel_separation_y", wheel_separation_y_);
 
   // Check to see if both X and Y separations are overrided.
-  if ((has_wheel_separation_x && !has_wheel_separation_y) || (!has_wheel_separation_x && has_wheel_separation_y))
+  if (has_wheel_separation_x != has_wheel_separation_y)
   {
     ROS_ERROR_STREAM_NAMED(name_, "Only one wheel separation overrided");
     return false;
   }
 
-  bool lookup_wheel_separation = has_wheel_separation_x && has_wheel_separation_y;
+  bool lookup_wheel_separation = !(has_wheel_separation_x && has_wheel_separation_y);
   bool lookup_wheel_radius = !controller_nh.getParam("wheel_radius", wheels_radius_);
 
   // Avoid URDF requirement if wheel separation and radius already specified
