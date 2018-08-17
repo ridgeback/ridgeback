@@ -36,6 +36,8 @@
  * Author: Enrique Fernández
  */
 
+#include <memory>
+
 #include <controller_interface/controller.h>
 #include <hardware_interface/joint_command_interface.h>
 #include <pluginlib/class_list_macros.h>
@@ -188,7 +190,7 @@ private:
    * \param       wheel_link    link of the wheel from which to get the radius
    * \param[out]  wheels_radius radius of the wheel read from the urdf
    */
-  bool getWheelRadius(const boost::shared_ptr<urdf::ModelInterface> model, const boost::shared_ptr<const urdf::Link>& wheel_link, double& wheel_radius);
+  bool getWheelRadius(const std::shared_ptr<urdf::ModelInterface> model, const std::shared_ptr<const urdf::Link>& wheel_link, double& wheel_radius);
 
   /**
    * \brief Sets the odometry publishing fields
