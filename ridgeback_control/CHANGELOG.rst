@@ -2,6 +2,14 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Changed boost::shared_ptr to urdfdom shared pointers
+* ridgeback_control: fixed missing calculation of wheels_k\_ (regression from daa4bc9050f786ed092fab911dd217da6febeae0)
+* Simplify boolean logic for wheel separation checks
+* Allow URDF to be optional
+* Contributors: Catherine Wong, Chad Rockey, Johannes Meyer, Tony Baltovski
+
 0.2.1 (2018-04-12)
 ------------------
 * Added support for planar motion using interactive markers.
