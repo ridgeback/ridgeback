@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.2 (2019-03-25)
+------------------
 * Changed boost::shared_ptr to urdfdom shared pointers
 * ridgeback_control: fixed missing calculation of wheels_k\_ (regression from daa4bc9050f786ed092fab911dd217da6febeae0)
 * Simplify boolean logic for wheel separation checks
