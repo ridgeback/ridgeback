@@ -6,7 +6,7 @@
     </plugin>
 
     <plugin name="ridgeback_ros_force_based_move" filename="libridgeback_ros_force_based_move.so">
-      <robotNamespace>/$(arg namespace)</robotNamespace>
+      <robotNamespace>/</robotNamespace>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
@@ -21,7 +21,7 @@
     </plugin>
 
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
-      <robotNamespace>/$(arg namespace)</robotNamespace>
+      <robotNamespace>/</robotNamespace>
       <updateRate>50.0</updateRate>
       <bodyName>imu_link</bodyName>
       <topicName>imu/data</topicName>
