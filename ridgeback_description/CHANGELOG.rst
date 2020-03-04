@@ -2,6 +2,12 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [ridgeback_description] Removing namespace arg.
+* Add namespace to gazebo plugin, it works well in multi robots case now
+* Contributors: Tony Baltovski, yizheng
+
 0.2.2 (2019-03-25)
 ------------------
 

@@ -2,6 +2,11 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix controller odom bug, it works well in multi robots case now
+* Contributors: yizheng
+
 0.2.2 (2019-03-25)
 ------------------
 * Changed boost::shared_ptr to urdfdom shared pointers
