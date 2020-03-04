@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2020-03-04)
+------------------
 * Fix controller odom bug, it works well in multi robots case now
 * Contributors: yizheng
 

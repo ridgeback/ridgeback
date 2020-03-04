@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>ridgeback_control</name>
-  <version>0.2.2</version>
+  <version>0.2.3</version>
   <description>Controllers for Ridgeback</description>
   <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
 
