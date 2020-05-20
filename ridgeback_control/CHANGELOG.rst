@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.0 (2020-05-19)
+------------------
 * Fix the default device for the PS4 controller to match with the updated udev rules for bionic
 * Contributors: Chris I-B
 
