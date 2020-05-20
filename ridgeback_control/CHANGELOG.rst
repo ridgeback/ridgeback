@@ -2,6 +2,11 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix the default device for the PS4 controller to match with the updated udev rules for bionic
+* Contributors: Chris I-B
+
 0.2.3 (2020-03-04)
 ------------------
 * Fix controller odom bug, it works well in multi robots case now

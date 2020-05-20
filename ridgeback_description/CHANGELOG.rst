@@ -2,6 +2,9 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.2.3 (2020-03-04)
 ------------------
 * [ridgeback_description] Removing namespace arg.
