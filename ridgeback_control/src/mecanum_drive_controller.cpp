@@ -455,6 +455,15 @@ bool MecanumDriveController::setWheelParamsFromUrdf(ros::NodeHandle& root_nh,
       wheels_radius_ = wheel0_radius;
     }
   }
+  else
+  {
+    ROS_INFO_STREAM("Wheel seperation in X: " << wheel_separation_x_);
+    ROS_INFO_STREAM("Wheel seperation in Y: " << wheel_separation_y_);
+
+    // The seperation is the total distance between the wheels in X and Y.
+
+    wheels_k_ = (wheel_separation_x_ + wheel_separation_y_) / 2.0;
+  }
 
   ROS_INFO_STREAM("Wheel radius: " << wheels_radius_);
 
