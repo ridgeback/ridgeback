@@ -2,15 +2,21 @@
   <arg name="scan_topic" default="front/scan" />
 
   <!-- Run the map server -->
- <arg name="map_file" default="$(find ridgeback_navigation)/maps/ridgeback_race.yaml"/>
- <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <arg name="map_file" default="$(find ridgeback_navigation)/maps/ridgeback_race.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
   <!--- Run AMCL -->
- <include file="$(find ridgeback_navigation)/launch/include/amcl.launch">
-   <arg name="scan_topic" value="$(arg scan_topic)" />
- </include>
+  <arg name="initial_pose_x" default="0.0" />
+  <arg name="initial_pose_y" default="0.0" />
+  <arg name="initial_pose_a" default="0.0" />
+  <include file="$(find ridgeback_navigation)/launch/include/amcl.launch" >
+    <arg name="scan_topic"     value="$(arg scan_topic)" />
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)" />
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)" />
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)" />
+  </include>
 
   <!--- Run Move Base -->
- <include file="$(find ridgeback_navigation)/launch/include/move_base.launch" />
+  <include file="$(find ridgeback_navigation)/launch/include/move_base.launch" />
 
 </launch>
