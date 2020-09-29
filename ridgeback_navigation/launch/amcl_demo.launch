@@ -1,11 +1,14 @@
 <launch>
+  <arg name="scan_topic" default="front/scan" />
 
   <!-- Run the map server -->
  <arg name="map_file" default="$(find ridgeback_navigation)/maps/ridgeback_race.yaml"/>
  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
   <!--- Run AMCL -->
- <include file="$(find ridgeback_navigation)/launch/include/amcl.launch" />
+ <include file="$(find ridgeback_navigation)/launch/include/amcl.launch">
+   <arg name="scan_topic" value="$(arg scan_topic)" />
+ </include>
 
   <!--- Run Move Base -->
  <include file="$(find ridgeback_navigation)/launch/include/move_base.launch" />
