@@ -1,7 +1,10 @@
 <launch>
+  <arg name="scan_topic" default="front/scan" />
 
   <!--- Run gmapping -->
-  <include file="$(find ridgeback_navigation)/launch/include/gmapping.launch" />
+  <include file="$(find ridgeback_navigation)/launch/include/gmapping.launch">
+    <arg name="scan_topic" value="$(arg scan_topic)" />
+  </include>
 
   <!--- Run Move Base -->
   <include file="$(find ridgeback_navigation)/launch/include/move_base.launch" />
