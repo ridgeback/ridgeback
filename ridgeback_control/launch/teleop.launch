@@ -11,7 +11,6 @@
 
     <group if="$(optenv RIDGEBACK_PS3 0)" >
       <rosparam command="load" file="$(find ridgeback_control)/config/teleop_ps3.yaml" />
-      <param name="joy_node/dev" value="$(arg joy_dev)" />
     </group>
 
     <node pkg="joy" type="joy_node" name="joy_node" />
