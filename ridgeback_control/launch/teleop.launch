@@ -1,11 +1,12 @@
 <launch>
-  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_dev" default="$(optenv RIDGEBACK_JOY_DEVICE /dev/input/ps4)" />
   <arg name="joystick" default="true" />
 
   <group ns="bluetooth_teleop" if="$(arg joystick)">
 
     <group unless="$(optenv RIDGEBACK_PS3 0)" >
       <rosparam command="load" file="$(find ridgeback_control)/config/teleop_ps4.yaml" />
+      <param name="joy_node/dev" value="$(arg joy_dev)" />
     </group>
 
     <group if="$(optenv RIDGEBACK_PS3 0)" >
