@@ -2,8 +2,8 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.1 (2022-01-12)
+------------------
 * Expose the scan_topic argument in the amcl and gmapping demos (`#43 <https://github.com/ridgeback/ridgeback/issues/43>`_)
 * [Nav][AMCL] adds args to pass initial pose to AMCL
   This adds the ros launch arguments initial_pose_x, initial_pose_y and

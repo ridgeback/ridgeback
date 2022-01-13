@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.1 (2022-01-12)
+------------------
 * add predict_to_current_time param
 * Add envar to set joy device (`#44 <https://github.com/ridgeback/ridgeback/issues/44>`_)
   * Add the RIDGEBACK_JOY_DEVICE envar, move the control_extras to the end of control.launch so it can be used to override anything
