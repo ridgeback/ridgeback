@@ -2,6 +2,19 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Expose the scan_topic argument in the amcl and gmapping demos (`#43 <https://github.com/ridgeback/ridgeback/issues/43>`_)
+* [Nav][AMCL] adds args to pass initial pose to AMCL
+  This adds the ros launch arguments initial_pose_x, initial_pose_y and
+  initial_pose_a which are passed through to the AMCL params of the same
+  name.
+  These args are defaulted to 0.0, 0.0, 0.0 as they were before so they
+  should have no changing effects if not set.
+  These args can be used to pre-seed the initial localization estimate.
+  Which is useful when you know where in the map you've spawned the robot.
+* Contributors: Alex Moriarty, Chris I-B
+
 0.3.0 (2020-05-19)
 ------------------
 

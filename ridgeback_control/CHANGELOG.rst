@@ -2,6 +2,16 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* add predict_to_current_time param
+* Add envar to set joy device (`#44 <https://github.com/ridgeback/ridgeback/issues/44>`_)
+  * Add the RIDGEBACK_JOY_DEVICE envar, move the control_extras to the end of control.launch so it can be used to override anything
+  * Don't use the envar for the joy device when the PS3 flag is enabled
+  * Add the default device for the ps3 configuration
+  * Remove the joy device from the ps4 config; we explicitly set it with the envar
+* Contributors: Chris I-B, Ebrahim
+
 0.3.0 (2020-05-19)
 ------------------
 * Fix the default device for the PS4 controller to match with the updated udev rules for bionic
