@@ -1,4 +1,4 @@
-ridgeback [![Build Status](https://travis-ci.org/ridgeback/ridgeback.svg?branch=kinetic-devel)](https://travis-ci.org/ridgeback/ridgeback)
+ridgeback
 =========
 
 Common packages for Ridgeback, including messages and robot description. These are packages relevant
