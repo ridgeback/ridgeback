@@ -2,6 +2,13 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Enable subst_value when loading config_extras (`#48 <https://github.com/ridgeback/ridgeback/issues/48>`_)
+* Add twist_mux
+* Bump CMake version to avoid CMP0048 warning.
+* Contributors: Chris I-B, Joey Yang, Tony Baltovski
+
 0.3.1 (2022-01-12)
 ------------------
 * add predict_to_current_time param

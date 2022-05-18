@@ -2,6 +2,11 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Bump CMake version to avoid CMP0048 warning.
+* Contributors: Tony Baltovski
+
 0.3.1 (2022-01-12)
 ------------------
 * Expose the scan_topic argument in the amcl and gmapping demos (`#43 <https://github.com/ridgeback/ridgeback/issues/43>`_)
