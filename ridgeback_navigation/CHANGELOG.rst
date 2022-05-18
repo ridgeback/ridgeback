@@ -2,8 +2,8 @@
 Changelog for package ridgeback_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.2 (2022-05-17)
+------------------
 * Bump CMake version to avoid CMP0048 warning.
 * Contributors: Tony Baltovski
 

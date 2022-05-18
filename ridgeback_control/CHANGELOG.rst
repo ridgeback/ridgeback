@@ -2,8 +2,8 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.2 (2022-05-17)
+------------------
 * Enable subst_value when loading config_extras (`#48 <https://github.com/ridgeback/ridgeback/issues/48>`_)
 * Add twist_mux
 * Bump CMake version to avoid CMP0048 warning.
