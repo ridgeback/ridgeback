@@ -59,14 +59,21 @@
                              location="-1" />
   </xacro:if>
 
-  <!-- If enabled, generate the optional Microstrain 3DM-GX2/3 IMU payload. -->
-  <xacro:include filename="$(find ridgeback_description)/urdf/accessories/microstrain_imu.urdf.xacro" />
-  <xacro:if value="$(optenv RIDGEBACK_MICROSTRAIN_IMU 0)">
-    <xacro:microstrain_imu prefix="$(optenv RIDGEBACK_MICROSTRAIN_IMU_PREFIX upgraded)"
-                           mount_link="$(optenv RIDGEBACK_MICROSTRAIN_IMU_MOUNT mid)_mount" >
-      <origin xyz="$(optenv RIDGEBACK_MICROSTRAIN_IMU_OFFSET 0 0 0)"
-              rpy="$(optenv RIDGEBACK_MICROSTRAIN_IMU_RPY 0 0 0)" />
-    </xacro:microstrain_imu>
+  <!--
+    Add Microstrain IMU. By default the RIDGEBACK comes equipped with an IMU linked to "imu_link". These extra
+    optional microstrain IMU's will be added to another frame, by default, "microstrain_link".
+  -->
+  <xacro:if value="$(optenv RIDGEBACK_IMU_MICROSTRAIN 0)">
+    <xacro:property name="frame"  value="$(optenv RIDGEBACK_IMU_MICROSTRAIN_LINK microstrain_link)"/>
+    <xacro:property name="parent" value="$(optenv RIDGEBACK_IMU_MICROSTRAIN_PARENT imu_link)"/>
+    <xacro:property name="xyz"    value="$(optenv RIDGEBACK_IMU_MICROSTRAIN_OFFSET 0 0 0)"/>
+    <xacro:property name="rpy"    value="$(optenv RIDGEBACK_IMU_MICROSTRAIN_RPY 0 0 0)"/>
+    <link name="${frame}" />
+    <joint name="${frame}_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${frame}" />
+      <origin xyz="${xyz}" rpy="${rpy}" />
+    </joint>
   </xacro:if>
 
 </robot>
