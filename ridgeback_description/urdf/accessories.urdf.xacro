@@ -59,7 +59,7 @@
                              location="-1" />
   </xacro:if>
 
-  <!-- If enabled, generate the optional Microstrain 3DM-GX2/3 IMU payload. -->
+  <!-- Legacy support for Microstrain IMU GX2 -->
   <xacro:include filename="$(find ridgeback_description)/urdf/accessories/microstrain_imu.urdf.xacro" />
   <xacro:if value="$(optenv RIDGEBACK_MICROSTRAIN_IMU 0)">
     <xacro:microstrain_imu prefix="$(optenv RIDGEBACK_MICROSTRAIN_IMU_PREFIX upgraded)"
@@ -69,9 +69,8 @@
     </xacro:microstrain_imu>
   </xacro:if>
 
-  <!--
-    Add Microstrain IMU. By default the Ridgeback comes equipped with an IMU linked to "imu_link". These extra
-    optional microstrain IMU's will be added to another frame, by default, "microstrain_link".
+  <!-- 
+    Support for current Microstrain IMU models, including GX3, GX5, GX25, etc. By default the Ridgeback comes equipped with an IMU linked to "imu_link". These extra optional microstrain IMU's will be added to another frame, by default, "microstrain_link". 
   -->
   <xacro:if value="$(optenv RIDGEBACK_IMU_MICROSTRAIN 0)">
     <xacro:property name="frame"  value="$(optenv RIDGEBACK_IMU_MICROSTRAIN_LINK microstrain_link)"/>
