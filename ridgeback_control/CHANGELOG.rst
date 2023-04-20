@@ -2,6 +2,9 @@
 Changelog for package ridgeback_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.3.2 (2022-05-17)
 ------------------
 * Enable subst_value when loading config_extras (`#48 <https://github.com/ridgeback/ridgeback/issues/48>`_)

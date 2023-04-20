@@ -2,6 +2,13 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added README to ridgeback description
+* Add comments to clarify between RIDGEBACK_MICROSTRAIN_IMU and RIDGEBACK_IMU_MICROSTRAIN.
+* Add URDF link and joint for microstrain_inertial_driver Microstrain IMU.
+* Contributors: Joey Yang, luis-camero
+
 0.3.2 (2022-05-17)
 ------------------
 * Bump CMake version to avoid CMP0048 warning.
