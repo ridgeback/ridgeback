@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.3 (2023-04-20)
+------------------
 * Added README to ridgeback description
 * Add comments to clarify between RIDGEBACK_MICROSTRAIN_IMU and RIDGEBACK_IMU_MICROSTRAIN.
 * Add URDF link and joint for microstrain_inertial_driver Microstrain IMU.
