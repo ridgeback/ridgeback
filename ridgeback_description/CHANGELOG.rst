@@ -2,8 +2,8 @@
 Changelog for package ridgeback_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.4 (2023-06-15)
+------------------
 * Take the thickness of the deck into consideration so that the riser link has the correct origin and the top link sits atop it correctly. Change the riser colour to light grey to match the unfinished aluminium extrusion used for this component
 * Initial commit of adding a customizable riser height to the URDF
 * Contributors: Chris Iverach-Brereton

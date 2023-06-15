@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ridgeback_description</name>
-  <version>0.3.3</version>
+  <version>0.3.4</version>
   <description>URDF robot description for Ridgeback</description>
 
   <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
