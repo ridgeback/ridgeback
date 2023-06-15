@@ -9,6 +9,8 @@
   <xacro:property name="chassis_width" value="0.793" />
   <xacro:property name="chassis_height" value="0.216" />
   <xacro:property name="deck_height" value="0.280" />
+  <xacro:property name="deck_thickness" value="0.005" />
+  <xacro:property name="riser_height" value="$(optenv RIDGEBACK_RISER_HEIGHT 0.055)" />
 
   <xacro:property name="axle_offset" value="0.0500" />
   <xacro:property name="rocker_offset" value="0.319" />
@@ -146,6 +148,27 @@
     </inertial>
   </link>
 
+  <link name="riser_link">
+    <visual>
+      <origin xyz="0 0 ${riser_height/2}" rpy="0 0 ${pi/4}" />
+      <geometry>
+        <box size="0.493 0.493 ${riser_height}" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${riser_height/2}" rpy="0 0 ${pi/4}" />
+      <geometry>
+        <box size="0.493 0.493 ${riser_height}" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="riser_link_joint" type="fixed">
+    <origin xyz="0 0 ${0.225 - deck_thickness}" rpy="0 0 0" />
+    <parent link="chassis_link" />
+    <child link="riser_link" />
+  </joint>
+
   <joint name="right_side_cover_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="chassis_link"/>
@@ -234,13 +257,13 @@
       <geometry>
         <mesh filename="package://ridgeback_description/meshes/lights.stl" />
       </geometry>
-      <material name="red" />
+      <material name="black" />
     </visual>
   </link>
 
   <joint name="top_link_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="chassis_link"/>
+    <origin xyz="0 0 ${riser_height-deck_height+deck_thickness}" rpy="0 0 0" />
+    <parent link="riser_link"/>
     <child link="top_link" />
   </joint>
 
@@ -291,9 +314,9 @@
 
   <link name="mid_mount" />
   <joint name="mid_mount_joint" type="fixed">
-    <parent link="base_link" />
+    <parent link="riser_link" />
     <child link="mid_mount" />
-    <origin xyz="0 0 ${deck_height}" rpy="0 0 0"/>
+    <origin xyz="0 0 ${riser_height + deck_thickness}" rpy="0 0 0"/>
   </joint>
 
   <!-- Bring in simulation data for Gazebo. -->
